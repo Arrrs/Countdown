@@ -73,6 +73,137 @@
         .header h1 {
             font-size: 20px;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        /* Logo Styles */
+        .logo-style-default {
+            font-weight: 600;
+        }
+
+        .logo-style-neon {
+            font-weight: 700;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #ff00ff;
+            animation: neon-flicker 2s infinite alternate;
+        }
+
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .logo-style-bold {
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo-style-rainbow {
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 3s linear infinite;
+        }
+
+        @keyframes rainbow-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .logo-style-elegant {
+            font-family: Georgia, serif;
+            font-weight: 300;
+            font-size: 22px;
+            letter-spacing: 3px;
+            font-style: italic;
+        }
+
+        .logo-style-retro {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-shadow: 3px 3px 0px rgba(255, 0, 0, 0.5);
+        }
+
+        .logo-style-glitch {
+            font-weight: 700;
+            position: relative;
+            animation: glitch-skew 1s infinite;
+        }
+
+        .logo-style-glitch::before,
+        .logo-style-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-style-glitch::before {
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+            color: #ff00ff;
+            z-index: -1;
+        }
+
+        .logo-style-glitch::after {
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+            color: #00ffff;
+            z-index: -2;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
+            20% { clip-path: inset(92% 0 1% 0); transform: translate(2px, 0); }
+            40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, 0); }
+            60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, 0); }
+            80% { clip-path: inset(54% 0 7% 0); transform: translate(-2px, 0); }
+            100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 85% 0); transform: translate(2px, 0); }
+            20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); }
+            40% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
+            60% { clip-path: inset(30% 0 70% 0); transform: translate(-2px, 0); }
+            80% { clip-path: inset(65% 0 15% 0); transform: translate(2px, 0); }
+            100% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(2deg); }
+            30% { transform: skew(0deg); }
+        }
+
+        .logo-style-gradient {
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-style-fire {
+            font-weight: 700;
+            background: linear-gradient(180deg, #ff0000 0%, #ff7f00 50%, #ffff00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fire-flicker 0.5s infinite alternate;
+        }
+
+        @keyframes fire-flicker {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
         }
 
         /* Drawer */
@@ -139,10 +270,17 @@
             padding: 12px;
         }
 
+        .version {
+            padding: 16px;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.3;
+        }
+
         .setting-item {
             margin-bottom: 16px;
             padding-bottom: 16px;
-            border-bottom: 1px solid;
+            /* border-bottom: 1px solid; */
         }
 
         .light .setting-item {
@@ -338,6 +476,68 @@
             }
         }
 
+        /* Digital Clock Styles */
+        .digital-style-default .time-value {
+            font-weight: bold;
+        }
+
+        .digital-style-lcd .time-value {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            background: #000000;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #003300;
+        }
+
+        .digital-style-neon .time-value {
+            font-weight: 700;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #00ffff;
+            animation: digital-neon-pulse 2s infinite alternate;
+        }
+
+        @keyframes digital-neon-pulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #00ffff; }
+            50% { opacity: 0.8; text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff, 0 0 20px #00ffff; }
+        }
+
+        .digital-style-segment .time-value {
+            font-family: 'Arial Black', sans-serif;
+            font-weight: 900;
+            color: #ff0000;
+            background: #1a0000;
+            padding: 20px;
+            border-radius: 8px;
+            letter-spacing: 8px;
+            text-shadow: 0 0 3px #ff0000;
+        }
+
+        .digital-style-flip .time-value {
+            font-family: 'Impact', sans-serif;
+            font-weight: 900;
+            background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 48%, #d0d0d0 52%, #c0c0c0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .light .digital-style-flip .time-value {
+            background: linear-gradient(180deg, #333333 0%, #1a1a1a 48%, #0a0a0a 52%, #000000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .digital-style-minimal .time-value {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
         /* Countdown */
         .countdown-container {
             max-width: 400px;
@@ -420,6 +620,176 @@
             font-size: 20px;
             padding: 16px;
             white-space: pre-line;
+        }
+
+        /* Progress Bar Countdown */
+        .countdown-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .progress-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .light .progress-bar {
+            background-color: #f0f0f0;
+        }
+
+        .dark .progress-bar {
+            background-color: #262626;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .progress-fill.hours {
+            background: linear-gradient(90deg, #1890ff, #40a9ff);
+        }
+
+        .progress-fill.minutes {
+            background: linear-gradient(90deg, #52c41a, #73d13d);
+        }
+
+        .progress-fill.seconds {
+            background: linear-gradient(90deg, #faad14, #ffc53d);
+        }
+
+        /* Circular Countdown */
+        .countdown-circular {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .circular-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .circular-svg {
+            transform: rotate(-90deg);
+        }
+
+        .circular-label {
+            font-size: 12px;
+            opacity: 0.65;
+        }
+
+        .circular-value {
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Flip Clock Countdown */
+        .countdown-flip {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .flip-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flip-card {
+            width: 70px;
+            height: 80px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .light .flip-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 50%, #d0d0d0 100%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .flip-card {
+            background: linear-gradient(180deg, #2a2a2a 0%, #1f1f1f 50%, #141414 50%, #0a0a0a 100%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .flip-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .flip-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .flip-label {
+            font-size: 12px;
+            opacity: 0.65;
+            text-transform: uppercase;
+        }
+
+        /* Compact Countdown */
+        .countdown-compact {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        .compact-segment {
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        .compact-segment .value {
+            color: #1890ff;
+        }
+
+        .compact-segment .label {
+            font-size: 14px;
+            opacity: 0.65;
+            margin-left: 2px;
         }
 
         /* Card sizing adjustments */
@@ -637,6 +1007,37 @@
                 </select>
             </div>
 
+            <!-- Show Logo -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">🎲</span>
+                    <span id="label-show-logo">Show logo</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="show-logo-toggle" onchange="toggleShowLogo()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Logo Style -->
+            <div class="setting-item" id="logo-style-setting">
+                <div class="setting-label">
+                    <span class="setting-icon">✨</span>
+                    <span id="label-logo-style">Logo style</span>
+                </div>
+                <select id="logo-style-select" onchange="changeLogoStyle()">
+                    <option value="default" id="logo-default">Default</option>
+                    <option value="neon" id="logo-neon">Neon</option>
+                    <option value="bold" id="logo-bold">Bold</option>
+                    <option value="rainbow" id="logo-rainbow">Rainbow</option>
+                    <option value="elegant" id="logo-elegant">Elegant</option>
+                    <option value="retro" id="logo-retro">Retro</option>
+                    <option value="glitch" id="logo-glitch">Glitch</option>
+                    <option value="gradient" id="logo-gradient">Gradient</option>
+                    <option value="fire" id="logo-fire">Fire</option>
+                </select>
+            </div>
+
             <!-- Show Current Time -->
             <div class="setting-item">
                 <div class="setting-label">
@@ -671,6 +1072,10 @@
                     <option value="modern" id="style-modern">Modern</option>
                     <option value="classic" id="style-classic">Classic</option>
                     <option value="minimal" id="style-minimal">Minimalist</option>
+                    <option value="elegant" id="style-elegant">Elegant</option>
+                    <option value="neon" id="style-neon">Neon</option>
+                    <option value="simple" id="style-simple">Simple</option>
+                    <option value="bold" id="style-bold">Bold</option>
                 </select>
             </div>
 
@@ -685,6 +1090,22 @@
                 </label>
             </div>
 
+            <!-- Digital Clock Style -->
+            <div class="setting-item" id="digital-time-style-setting">
+                <div class="setting-label">
+                    <span class="setting-icon">🔢</span>
+                    <span id="label-digital-time-style">Digital clock style</span>
+                </div>
+                <select id="digital-time-style-select" onchange="changeDigitalTimeStyle()">
+                    <option value="default" id="digital-time-default">Default</option>
+                    <option value="lcd" id="digital-time-lcd">LCD</option>
+                    <option value="neon" id="digital-time-neon">Neon</option>
+                    <option value="segment" id="digital-time-segment">Segment</option>
+                    <option value="flip" id="digital-time-flip">Flip</option>
+                    <option value="minimal" id="digital-time-minimal">Minimal</option>
+                </select>
+            </div>
+
             <!-- Countdown Style -->
             <div class="setting-item">
                 <div class="setting-label">
@@ -694,6 +1115,10 @@
                     <option value="digital" id="countdown-digital">Digital</option>
                     <option value="cards" id="countdown-cards">Cards</option>
                     <option value="text" id="countdown-text">Text</option>
+                    <option value="progress" id="countdown-progress">Progress Bars</option>
+                    <option value="circular" id="countdown-circular">Circular</option>
+                    <option value="flip" id="countdown-flip">Flip Clock</option>
+                    <option value="compact" id="countdown-compact">Compact</option>
                 </select>
             </div>
 
@@ -721,6 +1146,9 @@
                     <option value="uk">Українська</option>
                     <option value="bc">Білоцерківська</option>
                 </select>
+            </div>
+            <div class="version">
+                Version 0.2.1
             </div>
         </div>
     </div>
@@ -757,17 +1185,43 @@
                 settings: 'Settings',
                 darkTheme: 'Dark theme',
                 shift: 'Shift',
+                showLogo: 'Show logo',
+                logoStyle: 'Logo style',
+                logoDefault: 'Default',
+                logoNeon: 'Neon',
+                logoBold: 'Bold',
+                logoRainbow: 'Rainbow',
+                logoElegant: 'Elegant',
+                logoRetro: 'Retro',
+                logoGlitch: 'Glitch',
+                logoGradient: 'Gradient',
+                logoFire: 'Fire',
                 showCurrentTime: 'Show current time',
                 analogClock: 'Analog clock',
                 clockStyle: 'Clock style',
                 modern: 'Modern',
                 classic: 'Classic',
                 minimal: 'Minimalist',
+                elegant: 'Elegant',
+                neon: 'Neon',
+                simple: 'Simple',
+                bold: 'Bold',
                 showNumbers: 'Show numbers',
+                digitalTimeStyle: 'Digital clock style',
+                digitalTimeDefault: 'Default',
+                digitalTimeLcd: 'LCD',
+                digitalTimeNeon: 'Neon',
+                digitalTimeSegment: 'Segment',
+                digitalTimeFlip: 'Flip',
+                digitalTimeMinimal: 'Minimal',
                 countdownStyle: 'Countdown style',
                 digital: 'Digital',
                 cards: 'Cards',
                 text: 'Text',
+                progress: 'Progress Bars',
+                circular: 'Circular',
+                flip: 'Flip Clock',
+                compact: 'Compact',
                 language: 'Language',
                 currentTime: 'Current time',
                 shiftEnd: 'Until shift end',
@@ -787,17 +1241,43 @@
                 settings: 'Налаштування',
                 darkTheme: 'Темна тема',
                 shift: 'Зміна',
+                showLogo: 'Показувати логотип',
+                logoStyle: 'Стиль логотипу',
+                logoDefault: 'Стандартний',
+                logoNeon: 'Неон',
+                logoBold: 'Жирний',
+                logoRainbow: 'Веселка',
+                logoElegant: 'Елегантний',
+                logoRetro: 'Ретро',
+                logoGlitch: 'Глітч',
+                logoGradient: 'Градієнт',
+                logoFire: 'Вогонь',
                 showCurrentTime: 'Показувати поточний час',
                 analogClock: 'Аналоговий годинник',
                 clockStyle: 'Стиль годинника',
                 modern: 'Сучасний',
                 classic: 'Класичний',
                 minimal: 'Мінімалістичний',
+                elegant: 'Елегантний',
+                neon: 'Неон',
+                simple: 'Простий',
+                bold: 'Жирний',
                 showNumbers: 'Показувати цифри',
+                digitalTimeStyle: 'Стиль цифрового годинника',
+                digitalTimeDefault: 'Стандартний',
+                digitalTimeLcd: 'LCD',
+                digitalTimeNeon: 'Неон',
+                digitalTimeSegment: 'Сегментний',
+                digitalTimeFlip: 'Перекидний',
+                digitalTimeMinimal: 'Мінімальний',
                 countdownStyle: 'Стиль зворотного відліку',
                 digital: 'Цифровий',
                 cards: 'Картки',
                 text: 'Текстовий',
+                progress: 'Прогрес бари',
+                circular: 'Круговий',
+                flip: 'Перекидний',
+                compact: 'Компактний',
                 language: 'Мова',
                 currentTime: 'Поточний час',
                 shiftEnd: 'До кінця зміни',
@@ -817,17 +1297,43 @@
                 settings: 'Nastavení',
                 darkTheme: 'Tmavý režim',
                 shift: 'Směna',
+                showLogo: 'Zobrazit logo',
+                logoStyle: 'Styl loga',
+                logoDefault: 'Výchozí',
+                logoNeon: 'Neon',
+                logoBold: 'Tučný',
+                logoRainbow: 'Duha',
+                logoElegant: 'Elegantní',
+                logoRetro: 'Retro',
+                logoGlitch: 'Glitch',
+                logoGradient: 'Gradient',
+                logoFire: 'Oheň',
                 showCurrentTime: 'Zobrazit aktuální čas',
                 analogClock: 'Analogové hodiny',
                 clockStyle: 'Styl hodin',
                 modern: 'Moderní',
                 classic: 'Klasický',
                 minimal: 'Minimalistický',
+                elegant: 'Elegantní',
+                neon: 'Neon',
+                simple: 'Jednoduchý',
+                bold: 'Tučný',
                 showNumbers: 'Zobrazit čísla',
+                digitalTimeStyle: 'Styl digitálních hodin',
+                digitalTimeDefault: 'Výchozí',
+                digitalTimeLcd: 'LCD',
+                digitalTimeNeon: 'Neon',
+                digitalTimeSegment: 'Segment',
+                digitalTimeFlip: 'Překlopení',
+                digitalTimeMinimal: 'Minimální',
                 countdownStyle: 'Styl odpočítávání',
                 digital: 'Digitální',
                 cards: 'Karty',
                 text: 'Textový',
+                progress: 'Ukazatele průběhu',
+                circular: 'Kruhový',
+                flip: 'Překlopení',
+                compact: 'Kompaktní',
                 language: 'Jazyk',
                 currentTime: 'Aktuální čas',
                 shiftEnd: 'Do konce směny',
@@ -847,17 +1353,43 @@
                 settings: 'Настройки',
                 darkTheme: 'Темна тєма',
                 shift: 'Зміна',
+                showLogo: 'Показувать логотіп',
+                logoStyle: 'Стіль логотіпа',
+                logoDefault: 'Стандартний',
+                logoNeon: 'Нєон',
+                logoBold: 'Жирний',
+                logoRainbow: 'Радуга',
+                logoElegant: 'Елєгантний',
+                logoRetro: 'Ретро',
+                logoGlitch: 'Глітч',
+                logoGradient: 'Градієнт',
+                logoFire: 'Агонь',
                 showCurrentTime: 'Показувать тєкущє врємя',
                 analogClock: 'Аналогові часи',
                 clockStyle: 'Стіль часів',
                 modern: 'Соврємєнний',
                 classic: 'Класічєский',
                 minimal: 'Мінімалістічєский',
+                elegant: 'Елєгантний',
+                neon: 'Нєон',
+                simple: 'Простий',
+                bold: 'Жирний',
                 showNumbers: 'Показувать цифри',
+                digitalTimeStyle: 'Стіль цифрових часів',
+                digitalTimeDefault: 'Стандартний',
+                digitalTimeLcd: 'LCD',
+                digitalTimeNeon: 'Нєон',
+                digitalTimeSegment: 'Сєгмєнтний',
+                digitalTimeFlip: 'Перекидний',
+                digitalTimeMinimal: 'Мінімальний',
                 countdownStyle: 'Стіль обратного отщота',
                 digital: 'Цифровий',
                 cards: 'Карточний',
                 text: 'Тєкстовий',
+                progress: 'Прогрес бари',
+                circular: 'Круглий',
+                flip: 'Перекидающийся',
+                compact: 'Компактний',
                 language: 'Лангуаге',
                 currentTime: 'Тєкуущє врємя',
                 shiftEnd: 'До кінця зміни',
@@ -887,10 +1419,13 @@
         let state = {
             darkMode: true,
             selectedShift: 0,
+            showLogo: true,
+            logoStyle: 'default',
             showCurrentTime: true,
             analogClock: true,
             clockStyle: 'modern',
             showNumbers: true,
+            digitalTimeStyle: 'default',
             countdownStyle: 'digital',
             language: 'en',
             counterValue: 8,
@@ -905,6 +1440,12 @@
             const savedShift = localStorage.getItem('selectedShift');
             if (savedShift !== null) state.selectedShift = JSON.parse(savedShift);
 
+            const savedShowLogo = localStorage.getItem('showLogo');
+            if (savedShowLogo !== null) state.showLogo = JSON.parse(savedShowLogo);
+
+            const savedLogoStyle = localStorage.getItem('logoStyle');
+            if (savedLogoStyle !== null) state.logoStyle = savedLogoStyle;
+
             const savedShowTime = localStorage.getItem('showCurrentTime');
             if (savedShowTime !== null) state.showCurrentTime = JSON.parse(savedShowTime);
 
@@ -916,6 +1457,9 @@
 
             const savedShowNumbers = localStorage.getItem('showNumbers');
             if (savedShowNumbers !== null) state.showNumbers = JSON.parse(savedShowNumbers);
+
+            const savedDigitalTimeStyle = localStorage.getItem('digitalTimeStyle');
+            if (savedDigitalTimeStyle !== null) state.digitalTimeStyle = savedDigitalTimeStyle;
 
             const savedCountdownStyle = localStorage.getItem('countdownStyle');
             if (savedCountdownStyle !== null) state.countdownStyle = savedCountdownStyle;
@@ -939,10 +1483,13 @@
             document.body.className = state.darkMode ? 'dark' : 'light';
             document.getElementById('dark-mode-toggle').checked = state.darkMode;
             document.getElementById('shift-select').value = state.selectedShift;
+            document.getElementById('show-logo-toggle').checked = state.showLogo;
+            document.getElementById('logo-style-select').value = state.logoStyle;
             document.getElementById('show-time-toggle').checked = state.showCurrentTime;
             document.getElementById('analog-toggle').checked = state.analogClock;
             document.getElementById('clock-style-select').value = state.clockStyle;
             document.getElementById('show-numbers-toggle').checked = state.showNumbers;
+            document.getElementById('digital-time-style-select').value = state.digitalTimeStyle;
             document.getElementById('countdown-style-select').value = state.countdownStyle;
             document.getElementById('language-select').value = state.language;
             document.getElementById('show-counter-toggle').checked = state.showCounter;
@@ -950,15 +1497,19 @@
             updateVisibility();
             updateTranslations();
             updateCounter();
+            updateLogo();
         }
 
         // Update visibility
         function updateVisibility() {
+            document.getElementById('logo-style-setting').style.display = state.showLogo ? 'block' : 'none';
             document.getElementById('analog-setting').style.display = state.showCurrentTime ? 'block' : 'none';
             document.getElementById('clock-style-setting').style.display =
                 (state.showCurrentTime && state.analogClock) ? 'block' : 'none';
             document.getElementById('show-numbers-setting').style.display =
                 (state.showCurrentTime && state.analogClock) ? 'block' : 'none';
+            document.getElementById('digital-time-style-setting').style.display =
+                (state.showCurrentTime && !state.analogClock) ? 'block' : 'none';
             document.getElementById('counter-section').style.display = state.showCounter ? 'block' : 'none';
         }
 
@@ -969,17 +1520,43 @@
             document.getElementById('settings-title').textContent = t.settings;
             document.getElementById('label-dark-theme').textContent = t.darkTheme;
             document.getElementById('label-shift').textContent = t.shift;
+            document.getElementById('label-show-logo').textContent = t.showLogo;
+            document.getElementById('label-logo-style').textContent = t.logoStyle;
+            document.getElementById('logo-default').textContent = t.logoDefault;
+            document.getElementById('logo-neon').textContent = t.logoNeon;
+            document.getElementById('logo-bold').textContent = t.logoBold;
+            document.getElementById('logo-rainbow').textContent = t.logoRainbow;
+            document.getElementById('logo-elegant').textContent = t.logoElegant;
+            document.getElementById('logo-retro').textContent = t.logoRetro;
+            document.getElementById('logo-glitch').textContent = t.logoGlitch;
+            document.getElementById('logo-gradient').textContent = t.logoGradient;
+            document.getElementById('logo-fire').textContent = t.logoFire;
             document.getElementById('label-show-time').textContent = t.showCurrentTime;
             document.getElementById('label-analog').textContent = t.analogClock;
             document.getElementById('label-clock-style').textContent = t.clockStyle;
             document.getElementById('style-modern').textContent = t.modern;
             document.getElementById('style-classic').textContent = t.classic;
             document.getElementById('style-minimal').textContent = t.minimal;
+            document.getElementById('style-elegant').textContent = t.elegant;
+            document.getElementById('style-neon').textContent = t.neon;
+            document.getElementById('style-simple').textContent = t.simple;
+            document.getElementById('style-bold').textContent = t.bold;
             document.getElementById('label-show-numbers').textContent = t.showNumbers;
+            document.getElementById('label-digital-time-style').textContent = t.digitalTimeStyle;
+            document.getElementById('digital-time-default').textContent = t.digitalTimeDefault;
+            document.getElementById('digital-time-lcd').textContent = t.digitalTimeLcd;
+            document.getElementById('digital-time-neon').textContent = t.digitalTimeNeon;
+            document.getElementById('digital-time-segment').textContent = t.digitalTimeSegment;
+            document.getElementById('digital-time-flip').textContent = t.digitalTimeFlip;
+            document.getElementById('digital-time-minimal').textContent = t.digitalTimeMinimal;
             document.getElementById('label-countdown-style').textContent = t.countdownStyle;
             document.getElementById('countdown-digital').textContent = t.digital;
             document.getElementById('countdown-cards').textContent = t.cards;
             document.getElementById('countdown-text').textContent = t.text;
+            document.getElementById('countdown-progress').textContent = t.progress;
+            document.getElementById('countdown-circular').textContent = t.circular;
+            document.getElementById('countdown-flip').textContent = t.flip;
+            document.getElementById('countdown-compact').textContent = t.compact;
             document.getElementById('label-language').textContent = t.language;
             document.getElementById('counter-title').textContent = t.counterTitle;
             document.getElementById('label-show-counter').textContent = t.showCounter;
@@ -1012,6 +1589,45 @@
             return (shift.name === 'D12' || shift.name === 'N12') ? 12 : 8;
         }
 
+        function toggleShowLogo() {
+            state.showLogo = !state.showLogo;
+            localStorage.setItem('showLogo', JSON.stringify(state.showLogo));
+            updateVisibility();
+            updateLogo();
+        }
+
+        function changeLogoStyle() {
+            state.logoStyle = document.getElementById('logo-style-select').value;
+            localStorage.setItem('logoStyle', state.logoStyle);
+            updateLogo();
+        }
+
+        function updateLogo() {
+            const logo = document.getElementById('app-title');
+            if (!state.showLogo) {
+                logo.style.display = 'none';
+                return;
+            }
+            logo.style.display = 'block';
+
+            // Remove all logo style classes
+            logo.className = '';
+
+            // Add new style class
+            if (state.logoStyle !== 'default') {
+                logo.classList.add(`logo-style-${state.logoStyle}`);
+            } else {
+                logo.classList.add('logo-style-default');
+            }
+
+            // For glitch effect, we need the data-text attribute
+            if (state.logoStyle === 'glitch') {
+                logo.setAttribute('data-text', logo.textContent);
+            } else {
+                logo.removeAttribute('data-text');
+            }
+        }
+
         function toggleShowTime() {
             state.showCurrentTime = !state.showCurrentTime;
             localStorage.setItem('showCurrentTime', JSON.stringify(state.showCurrentTime));
@@ -1027,6 +1643,11 @@
         function changeClockStyle() {
             state.clockStyle = document.getElementById('clock-style-select').value;
             localStorage.setItem('clockStyle', state.clockStyle);
+        }
+
+        function changeDigitalTimeStyle() {
+            state.digitalTimeStyle = document.getElementById('digital-time-style-select').value;
+            localStorage.setItem('digitalTimeStyle', state.digitalTimeStyle);
         }
 
         function toggleShowNumbers() {
@@ -1159,48 +1780,73 @@
             const hourDeg = hours * 30 + minutes * 0.5;
 
             const clockSize = window.innerHeight < 800 ? 200 : 240;
-            const isClassic = state.clockStyle === 'classic';
-            const isMinimal = state.clockStyle === 'minimal';
+            const style = state.clockStyle;
 
+            // Style-specific settings
             const circleColor = state.darkMode ? '#1f1f1f' : '#ffffff';
             const strokeColor = state.darkMode ? '#434343' : '#d9d9d9';
             const textColor = state.darkMode ? '#ffffff' : '#000000';
             const markColor = state.darkMode ? '#666666' : '#cccccc';
-            const handColor = state.darkMode ? '#ffffff' : '#000000';
+            let handColor = state.darkMode ? '#ffffff' : '#000000';
+
+            // Neon style colors
+            if (style === 'neon') {
+                handColor = '#00ffff';
+            }
 
             let svg = `<svg width="${clockSize}" height="${clockSize}">`;
 
-            // Clock face
-            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${clockSize/2 - 10}"
-                fill="${circleColor}" stroke="${strokeColor}" stroke-width="${isClassic ? 4 : 2}"/>`;
+            // Add glow filter for neon style
+            if (style === 'neon') {
+                svg += `<defs>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>`;
+            }
 
-            // Numbers
-            if (state.showNumbers) {
+            // Clock face
+            const strokeWidth = style === 'classic' ? 4 : style === 'bold' ? 5 : style === 'elegant' ? 1 : 2;
+            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${clockSize/2 - 10}"
+                fill="${circleColor}" stroke="${strokeColor}" stroke-width="${strokeWidth}"/>`;
+
+            // Numbers - use Roman numerals for elegant style
+            if (state.showNumbers && style !== 'simple') {
+                const romanNumerals = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
                 for (let i = 0; i < 12; i++) {
-                    const num = i === 0 ? 12 : i;
+                    const num = style === 'elegant' ? romanNumerals[i] : (i === 0 ? 12 : i);
                     const angle = (i * 30 - 90) * (Math.PI / 180);
                     const radius = clockSize/2 - 35;
                     const x = clockSize/2 + radius * Math.cos(angle);
                     const y = clockSize/2 + radius * Math.sin(angle);
+                    const fontSize = style === 'minimal' ? 14 : style === 'bold' ? 22 : style === 'elegant' ? 16 : 18;
+                    const fontWeight = style === 'classic' || style === 'bold' ? 'bold' : style === 'elegant' ? '300' : 'normal';
+                    const numColor = style === 'neon' ? '#00ffff' : textColor;
                     svg += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle"
-                        font-size="${isMinimal ? 14 : 18}" font-weight="${isClassic ? 'bold' : 'normal'}"
-                        fill="${textColor}">${num}</text>`;
+                        font-size="${fontSize}" font-weight="${fontWeight}"
+                        fill="${numColor}" ${style === 'neon' ? 'filter="url(#glow)"' : ''}>${num}</text>`;
                 }
             }
 
-            // Tick marks
-            if (!isMinimal) {
+            // Tick marks (skip for simple and minimal styles)
+            if (style !== 'minimal' && style !== 'simple') {
                 for (let i = 0; i < 60; i++) {
                     const angle = (i * 6 - 90) * (Math.PI / 180);
                     const isHourMark = i % 5 === 0;
                     const outerRadius = clockSize/2 - 10;
-                    const innerRadius = outerRadius - (isHourMark ? 12 : 6);
+                    const innerRadius = outerRadius - (isHourMark ? (style === 'bold' ? 16 : 12) : (style === 'elegant' ? 4 : 6));
                     const x1 = clockSize/2 + outerRadius * Math.cos(angle);
                     const y1 = clockSize/2 + outerRadius * Math.sin(angle);
                     const x2 = clockSize/2 + innerRadius * Math.cos(angle);
                     const y2 = clockSize/2 + innerRadius * Math.sin(angle);
+                    const markStroke = style === 'neon' ? '#00ffff' : markColor;
+                    const markWidth = style === 'bold' ? (isHourMark ? 3 : 2) : (isHourMark ? 2 : 1);
                     svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"
-                        stroke="${markColor}" stroke-width="${isHourMark ? 2 : 1}"/>`;
+                        stroke="${markStroke}" stroke-width="${markWidth}" ${style === 'neon' ? 'filter="url(#glow)"' : ''}/>`;
                 }
             }
 
@@ -1208,28 +1854,37 @@
             const hourLength = clockSize * 0.28;
             const hourX = clockSize/2 + hourLength * Math.cos((hourDeg - 90) * Math.PI / 180);
             const hourY = clockSize/2 + hourLength * Math.sin((hourDeg - 90) * Math.PI / 180);
+            const hourWidth = style === 'classic' ? 8 : style === 'bold' ? 10 : style === 'elegant' ? 3 : style === 'simple' ? 4 : 6;
             svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${hourX}" y2="${hourY}"
-                stroke="${handColor}" stroke-width="${isClassic ? 8 : 6}" stroke-linecap="round"/>`;
+                stroke="${handColor}" stroke-width="${hourWidth}" stroke-linecap="round" ${style === 'neon' ? 'filter="url(#glow)"' : ''}/>`;
 
             // Minute hand
             const minuteLength = clockSize * 0.40;
             const minuteX = clockSize/2 + minuteLength * Math.cos((minuteDeg - 90) * Math.PI / 180);
             const minuteY = clockSize/2 + minuteLength * Math.sin((minuteDeg - 90) * Math.PI / 180);
+            const minuteWidth = style === 'classic' ? 6 : style === 'bold' ? 8 : style === 'elegant' ? 2 : style === 'simple' ? 3 : 4;
             svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${minuteX}" y2="${minuteY}"
-                stroke="${handColor}" stroke-width="${isClassic ? 6 : 4}" stroke-linecap="round"/>`;
+                stroke="${handColor}" stroke-width="${minuteWidth}" stroke-linecap="round" ${style === 'neon' ? 'filter="url(#glow)"' : ''}/>`;
 
-            // Second hand
-            if (!isMinimal) {
+            // Second hand (skip for minimal style)
+            if (style !== 'minimal') {
                 const secondLength = clockSize * 0.44;
                 const secondX = clockSize/2 + secondLength * Math.cos((secondDeg - 90) * Math.PI / 180);
                 const secondY = clockSize/2 + secondLength * Math.sin((secondDeg - 90) * Math.PI / 180);
+                const secondColor = style === 'neon' ? '#ff00ff' : '#ff4d4f';
+                const secondWidth = style === 'bold' ? 3 : 2;
                 svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${secondX}" y2="${secondY}"
-                    stroke="#ff4d4f" stroke-width="2" stroke-linecap="round"/>`;
+                    stroke="${secondColor}" stroke-width="${secondWidth}" stroke-linecap="round" ${style === 'neon' ? 'filter="url(#glow)"' : ''}/>`;
             }
 
             // Center dot
-            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${isClassic ? 8 : 6}" fill="${handColor}"/>`;
-            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="3" fill="#ff4d4f"/>`;
+            const centerSize = style === 'classic' || style === 'bold' ? 8 : style === 'elegant' ? 4 : 6;
+            const centerColor = style === 'neon' ? '#00ffff' : handColor;
+            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${centerSize}" fill="${centerColor}" ${style === 'neon' ? 'filter="url(#glow)"' : ''}/>`;
+            if (style !== 'simple') {
+                const dotColor = style === 'neon' ? '#ff00ff' : '#ff4d4f';
+                svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="3" fill="${dotColor}"/>`;
+            }
             svg += `</svg>`;
 
             return `<div class="card transparent clock-container">
@@ -1242,7 +1897,7 @@
             const t = translations[state.language];
             const timeStr = now.toTimeString().slice(0, 8); // HH:MM:SS
             return `<div class="card clock-container">
-                <div class="digital-time">
+                <div class="digital-time digital-style-${state.digitalTimeStyle}">
                     <h3>${t.currentTime}</h3>
                     <div class="time-value">${timeStr}</div>
                 </div>
@@ -1292,6 +1947,145 @@
                             <div class="countdown-card-title">${t.seconds}</div>
                             <div class="countdown-card-value seconds">${seconds}</div>
                         </div>
+                    </div>
+                </div>`;
+            } else if (state.countdownStyle === 'text') {
+                const hoursText = hours > 0 ? `${hours} ${t.hoursShort} ` : '';
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-text">${hoursText}${minutes} ${t.minutesShort} ${seconds} ${t.secondsShort}</div>
+                </div>`;
+            } else if (state.countdownStyle === 'progress') {
+                const shift = shifts[state.selectedShift];
+                const totalDuration = (shift.name === 'D12' || shift.name === 'N12') ? 12 : 8;
+                const totalMs = totalDuration * 3600000;
+                const elapsed = totalMs - diff;
+                const hoursPercent = ((totalDuration - hours) / totalDuration) * 100;
+                const minutesPercent = ((60 - minutes) / 60) * 100;
+                const secondsPercent = ((60 - seconds) / 60) * 100;
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-progress">
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>${t.hours}</span>
+                                <span>${hours}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill hours" style="width: ${hoursPercent}%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>${t.minutes}</span>
+                                <span>${minutes}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill minutes" style="width: ${minutesPercent}%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>${t.seconds}</span>
+                                <span>${seconds}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill seconds" style="width: ${secondsPercent}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (state.countdownStyle === 'circular') {
+                const hoursMax = (shifts[state.selectedShift].name === 'D12' || shifts[state.selectedShift].name === 'N12') ? 12 : 8;
+                const hoursPercent = (hours / hoursMax) * 100;
+                const minutesPercent = (minutes / 60) * 100;
+                const secondsPercent = (seconds / 60) * 100;
+                const size = 80;
+                const strokeWidth = 8;
+                const radius = (size - strokeWidth) / 2;
+                const circumference = 2 * Math.PI * radius;
+
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-circular">
+                        <div class="circular-item">
+                            <div style="position: relative; width: ${size}px; height: ${size}px;">
+                                <svg class="circular-svg" width="${size}" height="${size}">
+                                    <circle cx="${size/2}" cy="${size/2}" r="${radius}"
+                                        fill="none" stroke="${state.darkMode ? '#262626' : '#f0f0f0'}" stroke-width="${strokeWidth}"/>
+                                    <circle cx="${size/2}" cy="${size/2}" r="${radius}"
+                                        fill="none" stroke="#1890ff" stroke-width="${strokeWidth}"
+                                        stroke-dasharray="${circumference}"
+                                        stroke-dashoffset="${circumference * (1 - hoursPercent / 100)}"
+                                        stroke-linecap="round"/>
+                                </svg>
+                                <div class="circular-value hours">${hours}</div>
+                            </div>
+                            <div class="circular-label">${t.hours}</div>
+                        </div>
+                        <div class="circular-item">
+                            <div style="position: relative; width: ${size}px; height: ${size}px;">
+                                <svg class="circular-svg" width="${size}" height="${size}">
+                                    <circle cx="${size/2}" cy="${size/2}" r="${radius}"
+                                        fill="none" stroke="${state.darkMode ? '#262626' : '#f0f0f0'}" stroke-width="${strokeWidth}"/>
+                                    <circle cx="${size/2}" cy="${size/2}" r="${radius}"
+                                        fill="none" stroke="#52c41a" stroke-width="${strokeWidth}"
+                                        stroke-dasharray="${circumference}"
+                                        stroke-dashoffset="${circumference * (1 - minutesPercent / 100)}"
+                                        stroke-linecap="round"/>
+                                </svg>
+                                <div class="circular-value minutes">${minutes}</div>
+                            </div>
+                            <div class="circular-label">${t.minutes}</div>
+                        </div>
+                        <div class="circular-item">
+                            <div style="position: relative; width: ${size}px; height: ${size}px;">
+                                <svg class="circular-svg" width="${size}" height="${size}">
+                                    <circle cx="${size/2}" cy="${size/2}" r="${radius}"
+                                        fill="none" stroke="${state.darkMode ? '#262626' : '#f0f0f0'}" stroke-width="${strokeWidth}"/>
+                                    <circle cx="${size/2}" cy="${size/2}" r="${radius}"
+                                        fill="none" stroke="#faad14" stroke-width="${strokeWidth}"
+                                        stroke-dasharray="${circumference}"
+                                        stroke-dashoffset="${circumference * (1 - secondsPercent / 100)}"
+                                        stroke-linecap="round"/>
+                                </svg>
+                                <div class="circular-value seconds">${seconds}</div>
+                            </div>
+                            <div class="circular-label">${t.seconds}</div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (state.countdownStyle === 'flip') {
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-flip">
+                        <div class="flip-item">
+                            <div class="flip-card">
+                                <div class="flip-value">${String(hours).padStart(2, '0')}</div>
+                            </div>
+                            <div class="flip-label">${t.hours}</div>
+                        </div>
+                        <div class="flip-item">
+                            <div class="flip-card">
+                                <div class="flip-value">${String(minutes).padStart(2, '0')}</div>
+                            </div>
+                            <div class="flip-label">${t.minutes}</div>
+                        </div>
+                        <div class="flip-item">
+                            <div class="flip-card">
+                                <div class="flip-value">${String(seconds).padStart(2, '0')}</div>
+                            </div>
+                            <div class="flip-label">${t.seconds}</div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (state.countdownStyle === 'compact') {
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-compact">
+                        ${hours > 0 ? `<span class="compact-segment"><span class="value">${hours}</span><span class="label">${t.hoursShort}</span></span>` : ''}
+                        <span class="compact-segment"><span class="value">${minutes}</span><span class="label">${t.minutesShort}</span></span>
+                        <span class="compact-segment"><span class="value">${seconds}</span><span class="label">${t.secondsShort}</span></span>
                     </div>
                 </div>`;
             } else {
