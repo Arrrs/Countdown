@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Casssino">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23ff0000;stop-opacity:1'/><stop offset='100%25' style='stop-color:%23990000;stop-opacity:1'/></linearGradient></defs><rect fill='url(%23grad)' width='100' height='100' rx='15'/><circle cx='30' cy='30' r='18' fill='white'/><circle cx='30' cy='30' r='3' fill='%23ff0000'/><circle cx='70' cy='70' r='18' fill='white'/><circle cx='62' cy='62' r='3' fill='%23ff0000'/><circle cx='70' cy='70' r='3' fill='%23ff0000'/><circle cx='78' cy='78' r='3' fill='%23ff0000'/><circle cx='70' cy='78' r='3' fill='%23ff0000'/><circle cx='62' cy='70' r='3' fill='%23ff0000'/><circle cx='78' cy='62' r='3' fill='%23ff0000'/></svg>">
+    <title>Casssino - Shift Timer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        body.light {
+            background-color: #f0f2f5;
+            color: #000000;
+        }
+
+        body.dark {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            z-index: 999;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .light .header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dark .header {
+            background-color: #141414;
+            border-bottom: 1px solid #434343;
+        }
+
+        .menu-icon {
+            position: absolute;
+            left: 16px;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Drawer */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.45);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            z-index: 1001;
+            transition: left 0.3s;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+        }
+
+        .light .drawer {
+            background-color: #ffffff;
+        }
+
+        .dark .drawer {
+            background-color: #141414;
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 1px solid;
+        }
+
+        .light .drawer-header {
+            border-color: #f0f0f0;
+        }
+
+        .dark .drawer-header {
+            border-color: #434343;
+        }
+
+        .drawer-content {
+            padding: 12px;
+        }
+
+        .setting-item {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid;
+        }
+
+        .light .setting-item {
+            border-color: #f0f0f0;
+        }
+
+        .dark .setting-item {
+            border-color: #434343;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .setting-icon {
+            font-size: 16px;
+        }
+
+        /* Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.25);
+            transition: 0.3s;
+            border-radius: 22px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #1890ff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        /* Select */
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid;
+            font-size: 14px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .light select {
+            border-color: #d9d9d9;
+            color: #000000;
+        }
+
+        .dark select {
+            border-color: #434343;
+            color: #ffffff;
+        }
+
+        .light select option {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .dark select option {
+            background-color: #141414;
+            color: #ffffff;
+        }
+
+        .secondary-text {
+            opacity: 0.65;
+            font-size: 13px;
+        }
+
+        /* Content */
+        .content {
+            margin-top: 64px;
+            padding: 8px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            min-height: calc(100vh - 64px);
+            max-height: calc(100vh - 64px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .content > * {
+            flex-shrink: 1;
+            width: 100%;
+        }
+
+        /* Card */
+        .card {
+            border-radius: 8px;
+            padding: 16px;
+            transition: background-color 0.3s, border-color 0.3s;
+            width: 100%;
+        }
+
+        .light .card {
+            background-color: #ffffff;
+            border: 1px solid #f0f0f0;
+        }
+
+        .dark .card {
+            background-color: #1f1f1f;
+            border: 1px solid #434343;
+        }
+
+        .card.transparent {
+            background: transparent !important;
+            border: none !important;
+        }
+
+        /* Clock */
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .analog-clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        @media (min-height: 800px) {
+            .analog-clock {
+                width: 240px;
+                height: 240px;
+            }
+        }
+
+        .digital-time {
+            text-align: center;
+        }
+
+        .digital-time h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .digital-time .time-value {
+            font-size: 48px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        @media (min-height: 800px) {
+            .digital-time .time-value {
+                font-size: 56px;
+            }
+        }
+
+        /* Countdown */
+        .countdown-container {
+            max-width: 400px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .countdown-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .countdown-digital {
+            font-size: 32px;
+            font-weight: bold;
+            color: #52c41a;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        @media (min-height: 800px) {
+            .countdown-digital {
+                font-size: 40px;
+            }
+        }
+
+        .countdown-cards {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .countdown-card {
+            min-width: 70px;
+            flex: 1;
+            padding: 12px 8px;
+            border-radius: 6px;
+        }
+
+        .light .countdown-card {
+            background-color: #fafafa;
+        }
+
+        .dark .countdown-card {
+            background-color: #262626;
+        }
+
+        .countdown-card-title {
+            font-size: 12px;
+            opacity: 0.65;
+            margin-bottom: 4px;
+        }
+
+        .countdown-card-value {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .countdown-card-value.hours {
+            color: #1890ff;
+        }
+
+        .countdown-card-value.minutes {
+            color: #52c41a;
+        }
+
+        .countdown-card-value.seconds {
+            color: #faad14;
+        }
+
+        .countdown-text {
+            font-size: 20px;
+            margin-top: 8px;
+        }
+
+        .status-message {
+            font-size: 20px;
+            padding: 16px;
+            white-space: pre-line;
+        }
+
+        /* Card sizing adjustments */
+
+        /* Counter Section */
+        .counter-section {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .counter-container {
+            max-width: 400px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .counter-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .counter-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .counter-reset-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #8c8c8c;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            user-select: none;
+            padding: 2px;
+        }
+
+        .counter-reset-btn:active {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+
+        .counter-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .counter-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid;
+            font-size: 26px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .light .counter-btn {
+            background-color: #ffffff;
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+
+        .dark .counter-btn {
+            background-color: #141414;
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+
+        .counter-btn:active {
+            transform: scale(0.92);
+            opacity: 0.7;
+        }
+
+        .counter-value {
+            font-size: 44px;
+            font-weight: bold;
+            min-width: 70px;
+            text-align: center;
+            color: #1890ff;
+        }
+
+        /* Landscape Mode - Fullscreen Countdown */
+        @media (orientation: landscape) {
+            .header {
+                display: none !important;
+            }
+
+            .content {
+                margin-top: 0;
+                min-height: 100vh;
+                max-height: 100vh;
+                padding: 0;
+                justify-content: center;
+            }
+
+            #clock-display {
+                display: none !important;
+            }
+
+            #counter-section {
+                display: none !important;
+            }
+
+            #countdown-display {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #countdown-display .countdown-container {
+                max-width: none;
+                width: 100%;
+                padding: 32px 48px;
+                background: transparent !important;
+                border: none !important;
+            }
+
+            #countdown-display .countdown-title {
+                font-size: 28px;
+                margin-bottom: 24px;
+            }
+
+            #countdown-display .countdown-digital {
+                font-size: 80px;
+            }
+
+            #countdown-display .countdown-cards {
+                gap: 24px;
+                margin-top: 24px;
+            }
+
+            #countdown-display .countdown-card {
+                min-width: 120px;
+                padding: 24px 16px;
+            }
+
+            #countdown-display .countdown-card-title {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+
+            #countdown-display .countdown-card-value {
+                font-size: 56px;
+            }
+
+            #countdown-display .countdown-text {
+                font-size: 36px;
+            }
+
+            #countdown-display .status-message {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Header -->
+    <div class="header">
+        <div class="menu-icon" onclick="toggleDrawer()">☰</div>
+        <h1 id="app-title">Casssino</h1>
+    </div>
+
+    <!-- Drawer Overlay -->
+    <div class="drawer-overlay" id="drawer-overlay" ontouchstart="closeDrawer()" onclick="closeDrawer()"></div>
+
+    <!-- Drawer -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <span id="settings-title">Settings</span>
+            <span style="position: absolute; right: 16px; cursor: pointer; font-size: 24px;" ontouchstart="closeDrawer()" onclick="closeDrawer()">×</span>
+        </div>
+        <div class="drawer-content">
+            <!-- Dark Theme -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-dark-theme">Dark theme</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Shift -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">⏰</span>
+                    <span id="label-shift">Shift</span>
+                </div>
+                <select id="shift-select" onchange="changeShift()">
+                    <option value="0">D <span class="secondary-text">(07:00 - 15:00)</span></option>
+                    <option value="1">M <span class="secondary-text">(15:00 - 23:00)</span></option>
+                    <option value="2">N <span class="secondary-text">(23:00 - 07:00)</span></option>
+                    <option value="3">D12 <span class="secondary-text">(07:00 - 19:00)</span></option>
+                    <option value="4">N12 <span class="secondary-text">(19:00 - 07:00)</span></option>
+                </select>
+            </div>
+
+            <!-- Show Current Time -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">👁</span>
+                    <span id="label-show-time">Show current time</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="show-time-toggle" onchange="toggleShowTime()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Analog Clock -->
+            <div class="setting-item" id="analog-setting">
+                <div class="setting-label">
+                    <span class="setting-icon">🕐</span>
+                    <span id="label-analog">Analog clock</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="analog-toggle" onchange="toggleAnalog()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Clock Style -->
+            <div class="setting-item" id="clock-style-setting">
+                <div class="setting-label">
+                    <span class="setting-icon">⬛</span>
+                    <span id="label-clock-style">Clock style</span>
+                </div>
+                <select id="clock-style-select" onchange="changeClockStyle()">
+                    <option value="modern" id="style-modern">Modern</option>
+                    <option value="classic" id="style-classic">Classic</option>
+                    <option value="minimal" id="style-minimal">Minimalist</option>
+                </select>
+            </div>
+
+            <!-- Show Numbers -->
+            <div class="setting-item" id="show-numbers-setting">
+                <div class="setting-label">
+                    <span id="label-show-numbers">Show numbers</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="show-numbers-toggle" onchange="toggleShowNumbers()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Countdown Style -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span id="label-countdown-style">Countdown style</span>
+                </div>
+                <select id="countdown-style-select" onchange="changeCountdownStyle()">
+                    <option value="digital" id="countdown-digital">Digital</option>
+                    <option value="cards" id="countdown-cards">Cards</option>
+                    <option value="text" id="countdown-text">Text</option>
+                </select>
+            </div>
+
+            <!-- Show Counter -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">🔢</span>
+                    <span id="label-show-counter">Show counter</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="show-counter-toggle" onchange="toggleShowCounter()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Language -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">🌍</span>
+                    <span id="label-language">Language</span>
+                </div>
+                <select id="language-select" onchange="changeLanguage()">
+                    <option value="en">English</option>
+                    <option value="cs">Čeština</option>
+                    <option value="uk">Українська</option>
+                    <option value="bc">Білоцерківська</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Clock Display -->
+        <div id="clock-display"></div>
+
+        <!-- Countdown Display -->
+        <div id="countdown-display"></div>
+
+        <!-- Counter Section -->
+        <div class="counter-section" id="counter-section">
+            <div class="card counter-container">
+                <div class="counter-header">
+                    <h4 class="counter-title" id="counter-title">Counter</h4>
+                    <div class="counter-reset-btn" onclick="resetCounter()">↻</div>
+                </div>
+                <div class="counter-display">
+                    <div class="counter-btn" onclick="decrementCounter()">−</div>
+                    <div class="counter-value" id="counter-value">8</div>
+                    <div class="counter-btn" onclick="incrementCounter()">+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                app: 'Casssino',
+                settings: 'Settings',
+                darkTheme: 'Dark theme',
+                shift: 'Shift',
+                showCurrentTime: 'Show current time',
+                analogClock: 'Analog clock',
+                clockStyle: 'Clock style',
+                modern: 'Modern',
+                classic: 'Classic',
+                minimal: 'Minimalist',
+                showNumbers: 'Show numbers',
+                countdownStyle: 'Countdown style',
+                digital: 'Digital',
+                cards: 'Cards',
+                text: 'Text',
+                language: 'Language',
+                currentTime: 'Current time',
+                shiftEnd: 'Until shift end',
+                hours: 'Hours',
+                minutes: 'Minutes',
+                seconds: 'Seconds',
+                hoursShort: 'h',
+                minutesShort: 'min',
+                secondsShort: 'sec',
+                shiftNotStarted: 'Shift "{name}" has not started yet',
+                shiftEnded: 'Shift "{name}" has ended',
+                counterTitle: 'Counter',
+                showCounter: 'Show counter',
+            },
+            uk: {
+                app: 'Casssino',
+                settings: 'Налаштування',
+                darkTheme: 'Темна тема',
+                shift: 'Зміна',
+                showCurrentTime: 'Показувати поточний час',
+                analogClock: 'Аналоговий годинник',
+                clockStyle: 'Стиль годинника',
+                modern: 'Сучасний',
+                classic: 'Класичний',
+                minimal: 'Мінімалістичний',
+                showNumbers: 'Показувати цифри',
+                countdownStyle: 'Стиль зворотного відліку',
+                digital: 'Цифровий',
+                cards: 'Картки',
+                text: 'Текстовий',
+                language: 'Мова',
+                currentTime: 'Поточний час',
+                shiftEnd: 'До кінця зміни',
+                hours: 'Годин',
+                minutes: 'Хвилин',
+                seconds: 'Секунд',
+                hoursShort: 'год',
+                minutesShort: 'хв',
+                secondsShort: 'сек',
+                shiftNotStarted: 'Зміна "{name}" ще не почалась',
+                shiftEnded: 'Зміна "{name}" закінчилась',
+                counterTitle: 'Лічильник',
+                showCounter: 'Показувати лічильник',
+            },
+            cs: {
+                app: 'Casssino',
+                settings: 'Nastavení',
+                darkTheme: 'Tmavý režim',
+                shift: 'Směna',
+                showCurrentTime: 'Zobrazit aktuální čas',
+                analogClock: 'Analogové hodiny',
+                clockStyle: 'Styl hodin',
+                modern: 'Moderní',
+                classic: 'Klasický',
+                minimal: 'Minimalistický',
+                showNumbers: 'Zobrazit čísla',
+                countdownStyle: 'Styl odpočítávání',
+                digital: 'Digitální',
+                cards: 'Karty',
+                text: 'Textový',
+                language: 'Jazyk',
+                currentTime: 'Aktuální čas',
+                shiftEnd: 'Do konce směny',
+                hours: 'Hodin',
+                minutes: 'Minut',
+                seconds: 'Sekund',
+                hoursShort: 'hod',
+                minutesShort: 'min',
+                secondsShort: 'sek',
+                shiftNotStarted: 'Směna "{name}" ještě nezačala',
+                shiftEnded: 'Směna "{name}" skončila',
+                counterTitle: 'Počítadlo',
+                showCounter: 'Zobrazit počítadlo',
+            },
+            bc: {
+                app: 'Казззіно',
+                settings: 'Настройки',
+                darkTheme: 'Темна тєма',
+                shift: 'Зміна',
+                showCurrentTime: 'Показувать тєкущє врємя',
+                analogClock: 'Аналогові часи',
+                clockStyle: 'Стіль часів',
+                modern: 'Соврємєнний',
+                classic: 'Класічєский',
+                minimal: 'Мінімалістічєский',
+                showNumbers: 'Показувать цифри',
+                countdownStyle: 'Стіль обратного отщота',
+                digital: 'Цифровий',
+                cards: 'Карточний',
+                text: 'Тєкстовий',
+                language: 'Лангуаге',
+                currentTime: 'Тєкуущє врємя',
+                shiftEnd: 'До кінця зміни',
+                hours: 'Часов',
+                minutes: 'Минут',
+                seconds: 'Сєкунд',
+                hoursShort: 'год',
+                minutesShort: 'хв',
+                secondsShort: 'сєк',
+                shiftNotStarted: 'Зміна "{name}" ше не началась',
+                shiftEnded: 'Зміна "{name}" закончилась',
+                counterTitle: 'Щотчик',
+                showCounter: 'Показувать щотчик',
+            }
+        };
+
+        // Shifts
+        const shifts = [
+            { name: 'D', start: '07:00', end: '15:00' },
+            { name: 'M', start: '15:00', end: '23:00' },
+            { name: 'N', start: '23:00', end: '07:00' },
+            { name: 'D12', start: '07:00', end: '19:00' },
+            { name: 'N12', start: '19:00', end: '07:00' },
+        ];
+
+        // State
+        let state = {
+            darkMode: true,
+            selectedShift: 0,
+            showCurrentTime: true,
+            analogClock: true,
+            clockStyle: 'modern',
+            showNumbers: true,
+            countdownStyle: 'digital',
+            language: 'en',
+            counterValue: 8,
+            showCounter: true
+        };
+
+        // Load state from localStorage
+        function loadState() {
+            const savedDarkMode = localStorage.getItem('darkMode');
+            if (savedDarkMode !== null) state.darkMode = JSON.parse(savedDarkMode);
+
+            const savedShift = localStorage.getItem('selectedShift');
+            if (savedShift !== null) state.selectedShift = JSON.parse(savedShift);
+
+            const savedShowTime = localStorage.getItem('showCurrentTime');
+            if (savedShowTime !== null) state.showCurrentTime = JSON.parse(savedShowTime);
+
+            const savedAnalog = localStorage.getItem('analogClock');
+            if (savedAnalog !== null) state.analogClock = JSON.parse(savedAnalog);
+
+            const savedClockStyle = localStorage.getItem('clockStyle');
+            if (savedClockStyle !== null) state.clockStyle = savedClockStyle;
+
+            const savedShowNumbers = localStorage.getItem('showNumbers');
+            if (savedShowNumbers !== null) state.showNumbers = JSON.parse(savedShowNumbers);
+
+            const savedCountdownStyle = localStorage.getItem('countdownStyle');
+            if (savedCountdownStyle !== null) state.countdownStyle = savedCountdownStyle;
+
+            const savedLanguage = localStorage.getItem('language');
+            if (savedLanguage !== null && translations[savedLanguage]) {
+                state.language = savedLanguage;
+            }
+
+            const savedCounterValue = localStorage.getItem('counterValue');
+            if (savedCounterValue !== null) state.counterValue = JSON.parse(savedCounterValue);
+
+            const savedShowCounter = localStorage.getItem('showCounter');
+            if (savedShowCounter !== null) state.showCounter = JSON.parse(savedShowCounter);
+
+            applyState();
+        }
+
+        // Apply state to UI
+        function applyState() {
+            document.body.className = state.darkMode ? 'dark' : 'light';
+            document.getElementById('dark-mode-toggle').checked = state.darkMode;
+            document.getElementById('shift-select').value = state.selectedShift;
+            document.getElementById('show-time-toggle').checked = state.showCurrentTime;
+            document.getElementById('analog-toggle').checked = state.analogClock;
+            document.getElementById('clock-style-select').value = state.clockStyle;
+            document.getElementById('show-numbers-toggle').checked = state.showNumbers;
+            document.getElementById('countdown-style-select').value = state.countdownStyle;
+            document.getElementById('language-select').value = state.language;
+            document.getElementById('show-counter-toggle').checked = state.showCounter;
+
+            updateVisibility();
+            updateTranslations();
+            updateCounter();
+        }
+
+        // Update visibility
+        function updateVisibility() {
+            document.getElementById('analog-setting').style.display = state.showCurrentTime ? 'block' : 'none';
+            document.getElementById('clock-style-setting').style.display =
+                (state.showCurrentTime && state.analogClock) ? 'block' : 'none';
+            document.getElementById('show-numbers-setting').style.display =
+                (state.showCurrentTime && state.analogClock) ? 'block' : 'none';
+            document.getElementById('counter-section').style.display = state.showCounter ? 'block' : 'none';
+        }
+
+        // Update translations
+        function updateTranslations() {
+            const t = translations[state.language];
+            document.getElementById('app-title').textContent = t.app;
+            document.getElementById('settings-title').textContent = t.settings;
+            document.getElementById('label-dark-theme').textContent = t.darkTheme;
+            document.getElementById('label-shift').textContent = t.shift;
+            document.getElementById('label-show-time').textContent = t.showCurrentTime;
+            document.getElementById('label-analog').textContent = t.analogClock;
+            document.getElementById('label-clock-style').textContent = t.clockStyle;
+            document.getElementById('style-modern').textContent = t.modern;
+            document.getElementById('style-classic').textContent = t.classic;
+            document.getElementById('style-minimal').textContent = t.minimal;
+            document.getElementById('label-show-numbers').textContent = t.showNumbers;
+            document.getElementById('label-countdown-style').textContent = t.countdownStyle;
+            document.getElementById('countdown-digital').textContent = t.digital;
+            document.getElementById('countdown-cards').textContent = t.cards;
+            document.getElementById('countdown-text').textContent = t.text;
+            document.getElementById('label-language').textContent = t.language;
+            document.getElementById('counter-title').textContent = t.counterTitle;
+            document.getElementById('label-show-counter').textContent = t.showCounter;
+        }
+
+        // Toggle functions
+        function toggleDrawer() {
+            document.getElementById('drawer').classList.toggle('open');
+            document.getElementById('drawer-overlay').classList.toggle('open');
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer').classList.remove('open');
+            document.getElementById('drawer-overlay').classList.remove('open');
+        }
+
+        function toggleDarkMode() {
+            state.darkMode = !state.darkMode;
+            localStorage.setItem('darkMode', JSON.stringify(state.darkMode));
+            document.body.className = state.darkMode ? 'dark' : 'light';
+        }
+
+        function changeShift() {
+            state.selectedShift = parseInt(document.getElementById('shift-select').value);
+            localStorage.setItem('selectedShift', JSON.stringify(state.selectedShift));
+        }
+
+        function getDefaultCounterValue() {
+            const shift = shifts[state.selectedShift];
+            return (shift.name === 'D12' || shift.name === 'N12') ? 12 : 8;
+        }
+
+        function toggleShowTime() {
+            state.showCurrentTime = !state.showCurrentTime;
+            localStorage.setItem('showCurrentTime', JSON.stringify(state.showCurrentTime));
+            updateVisibility();
+        }
+
+        function toggleAnalog() {
+            state.analogClock = !state.analogClock;
+            localStorage.setItem('analogClock', JSON.stringify(state.analogClock));
+            updateVisibility();
+        }
+
+        function changeClockStyle() {
+            state.clockStyle = document.getElementById('clock-style-select').value;
+            localStorage.setItem('clockStyle', state.clockStyle);
+        }
+
+        function toggleShowNumbers() {
+            state.showNumbers = !state.showNumbers;
+            localStorage.setItem('showNumbers', JSON.stringify(state.showNumbers));
+        }
+
+        function changeCountdownStyle() {
+            state.countdownStyle = document.getElementById('countdown-style-select').value;
+            localStorage.setItem('countdownStyle', state.countdownStyle);
+        }
+
+        function changeLanguage() {
+            const newLanguage = document.getElementById('language-select').value;
+            // Validate language exists in translations
+            if (translations[newLanguage]) {
+                state.language = newLanguage;
+                localStorage.setItem('language', state.language);
+                updateTranslations();
+            }
+        }
+
+        function toggleShowCounter() {
+            state.showCounter = !state.showCounter;
+            localStorage.setItem('showCounter', JSON.stringify(state.showCounter));
+            updateVisibility();
+        }
+
+        // Counter functions
+        function updateCounter() {
+            document.getElementById('counter-value').textContent = state.counterValue;
+        }
+
+        function incrementCounter() {
+            state.counterValue++;
+            localStorage.setItem('counterValue', JSON.stringify(state.counterValue));
+            updateCounter();
+        }
+
+        function decrementCounter() {
+            if (state.counterValue > 0) {
+                state.counterValue--;
+                localStorage.setItem('counterValue', JSON.stringify(state.counterValue));
+                updateCounter();
+            }
+        }
+
+        function resetCounter() {
+            state.counterValue = getDefaultCounterValue();
+            localStorage.setItem('counterValue', JSON.stringify(state.counterValue));
+            updateCounter();
+        }
+
+        // Time utilities
+        function parseTime(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return { hours, minutes };
+        }
+
+        function getShiftEndTime(now, shift) {
+            const startTime = parseTime(shift.start);
+            const endTime = parseTime(shift.end);
+
+            let endDate = new Date(now);
+            endDate.setHours(endTime.hours, endTime.minutes, 0, 0);
+
+            // Handle night shifts that cross midnight
+            if (endTime.hours < startTime.hours) {
+                // This is a night shift
+                if (now.getHours() < endTime.hours) {
+                    // We're in early morning before shift end - end is today
+                    // (already set correctly)
+                } else {
+                    // We're either during the shift evening or after it ended
+                    // End time is tomorrow
+                    endDate.setDate(endDate.getDate() + 1);
+                }
+            } else {
+                // Day shift
+                if (now > endDate) {
+                    // Shift ended today, next one is tomorrow
+                    endDate.setDate(endDate.getDate() + 1);
+                }
+            }
+
+            return endDate;
+        }
+
+        function getShiftStatus(now, shift) {
+            const startTime = parseTime(shift.start);
+            const endTime = parseTime(shift.end);
+
+            let startDate = new Date(now);
+            startDate.setHours(startTime.hours, startTime.minutes, 0, 0);
+
+            let endDate = new Date(now);
+            endDate.setHours(endTime.hours, endTime.minutes, 0, 0);
+
+            // Handle night shifts that cross midnight
+            if (endTime.hours < startTime.hours) {
+                // This is a night shift (e.g., 23:00-07:00 or 19:00-07:00)
+                if (now.getHours() < endTime.hours) {
+                    // We're in the early morning (after midnight but before shift end)
+                    // Start was yesterday, end is today
+                    startDate.setDate(startDate.getDate() - 1);
+                } else if (now.getHours() >= startTime.hours) {
+                    // We're in the evening/night (after shift start but before midnight)
+                    // Start is today, end is tomorrow
+                    endDate.setDate(endDate.getDate() + 1);
+                } else {
+                    // We're in the middle of the day (after shift end, before shift start)
+                    // Next shift starts today evening, ends tomorrow morning
+                    endDate.setDate(endDate.getDate() + 1);
+                }
+            }
+
+            if (now < startDate) return 'notStarted';
+            if (now > endDate) return 'ended';
+            return 'active';
+        }
+
+        // Render analog clock
+        function renderAnalogClock(now) {
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours() % 12;
+
+            const secondDeg = seconds * 6;
+            const minuteDeg = minutes * 6 + seconds * 0.1;
+            const hourDeg = hours * 30 + minutes * 0.5;
+
+            const clockSize = window.innerHeight < 800 ? 200 : 240;
+            const isClassic = state.clockStyle === 'classic';
+            const isMinimal = state.clockStyle === 'minimal';
+
+            const circleColor = state.darkMode ? '#1f1f1f' : '#ffffff';
+            const strokeColor = state.darkMode ? '#434343' : '#d9d9d9';
+            const textColor = state.darkMode ? '#ffffff' : '#000000';
+            const markColor = state.darkMode ? '#666666' : '#cccccc';
+            const handColor = state.darkMode ? '#ffffff' : '#000000';
+
+            let svg = `<svg width="${clockSize}" height="${clockSize}">`;
+
+            // Clock face
+            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${clockSize/2 - 10}"
+                fill="${circleColor}" stroke="${strokeColor}" stroke-width="${isClassic ? 4 : 2}"/>`;
+
+            // Numbers
+            if (state.showNumbers) {
+                for (let i = 0; i < 12; i++) {
+                    const num = i === 0 ? 12 : i;
+                    const angle = (i * 30 - 90) * (Math.PI / 180);
+                    const radius = clockSize/2 - 35;
+                    const x = clockSize/2 + radius * Math.cos(angle);
+                    const y = clockSize/2 + radius * Math.sin(angle);
+                    svg += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle"
+                        font-size="${isMinimal ? 14 : 18}" font-weight="${isClassic ? 'bold' : 'normal'}"
+                        fill="${textColor}">${num}</text>`;
+                }
+            }
+
+            // Tick marks
+            if (!isMinimal) {
+                for (let i = 0; i < 60; i++) {
+                    const angle = (i * 6 - 90) * (Math.PI / 180);
+                    const isHourMark = i % 5 === 0;
+                    const outerRadius = clockSize/2 - 10;
+                    const innerRadius = outerRadius - (isHourMark ? 12 : 6);
+                    const x1 = clockSize/2 + outerRadius * Math.cos(angle);
+                    const y1 = clockSize/2 + outerRadius * Math.sin(angle);
+                    const x2 = clockSize/2 + innerRadius * Math.cos(angle);
+                    const y2 = clockSize/2 + innerRadius * Math.sin(angle);
+                    svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"
+                        stroke="${markColor}" stroke-width="${isHourMark ? 2 : 1}"/>`;
+                }
+            }
+
+            // Hour hand
+            const hourLength = clockSize * 0.28;
+            const hourX = clockSize/2 + hourLength * Math.cos((hourDeg - 90) * Math.PI / 180);
+            const hourY = clockSize/2 + hourLength * Math.sin((hourDeg - 90) * Math.PI / 180);
+            svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${hourX}" y2="${hourY}"
+                stroke="${handColor}" stroke-width="${isClassic ? 8 : 6}" stroke-linecap="round"/>`;
+
+            // Minute hand
+            const minuteLength = clockSize * 0.40;
+            const minuteX = clockSize/2 + minuteLength * Math.cos((minuteDeg - 90) * Math.PI / 180);
+            const minuteY = clockSize/2 + minuteLength * Math.sin((minuteDeg - 90) * Math.PI / 180);
+            svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${minuteX}" y2="${minuteY}"
+                stroke="${handColor}" stroke-width="${isClassic ? 6 : 4}" stroke-linecap="round"/>`;
+
+            // Second hand
+            if (!isMinimal) {
+                const secondLength = clockSize * 0.44;
+                const secondX = clockSize/2 + secondLength * Math.cos((secondDeg - 90) * Math.PI / 180);
+                const secondY = clockSize/2 + secondLength * Math.sin((secondDeg - 90) * Math.PI / 180);
+                svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${secondX}" y2="${secondY}"
+                    stroke="#ff4d4f" stroke-width="2" stroke-linecap="round"/>`;
+            }
+
+            // Center dot
+            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${isClassic ? 8 : 6}" fill="${handColor}"/>`;
+            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="3" fill="#ff4d4f"/>`;
+            svg += `</svg>`;
+
+            return `<div class="card transparent clock-container">
+                <div class="analog-clock">${svg}</div>
+            </div>`;
+        }
+
+        // Render digital clock
+        function renderDigitalClock(now) {
+            const t = translations[state.language];
+            const timeStr = now.toTimeString().slice(0, 8); // HH:MM:SS
+            return `<div class="card clock-container">
+                <div class="digital-time">
+                    <h3>${t.currentTime}</h3>
+                    <div class="time-value">${timeStr}</div>
+                </div>
+            </div>`;
+        }
+
+        // Render countdown
+        function renderCountdown(now) {
+            const t = translations[state.language];
+            const shift = shifts[state.selectedShift];
+            const status = getShiftStatus(now, shift);
+
+            if (status !== 'active') {
+                let message = status === 'notStarted'
+                    ? t.shiftNotStarted.replace('{name}', shift.name)
+                    : t.shiftEnded.replace('{name}', shift.name);
+                return `<div class="card countdown-container">
+                    <div class="status-message">${message}</div>
+                </div>`;
+            }
+
+            const endTime = getShiftEndTime(now, shift);
+            const diff = endTime - now;
+            const hours = Math.floor(diff / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+
+            if (state.countdownStyle === 'digital') {
+                const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-digital">${timeStr}</div>
+                </div>`;
+            } else if (state.countdownStyle === 'cards') {
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-cards">
+                        <div class="countdown-card">
+                            <div class="countdown-card-title">${t.hours}</div>
+                            <div class="countdown-card-value hours">${hours}</div>
+                        </div>
+                        <div class="countdown-card">
+                            <div class="countdown-card-title">${t.minutes}</div>
+                            <div class="countdown-card-value minutes">${minutes}</div>
+                        </div>
+                        <div class="countdown-card">
+                            <div class="countdown-card-title">${t.seconds}</div>
+                            <div class="countdown-card-value seconds">${seconds}</div>
+                        </div>
+                    </div>
+                </div>`;
+            } else {
+                const hoursText = hours > 0 ? `${hours} ${t.hoursShort} ` : '';
+                return `<div class="card countdown-container">
+                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <div class="countdown-text">${hoursText}${minutes} ${t.minutesShort} ${seconds} ${t.secondsShort}</div>
+                </div>`;
+            }
+        }
+
+        // Update display
+        function updateDisplay() {
+            const now = new Date();
+
+            // Update clock
+            const clockDisplay = document.getElementById('clock-display');
+            if (state.showCurrentTime) {
+                if (state.analogClock) {
+                    clockDisplay.innerHTML = renderAnalogClock(now);
+                } else {
+                    clockDisplay.innerHTML = renderDigitalClock(now);
+                }
+            } else {
+                clockDisplay.innerHTML = '';
+            }
+
+            // Update countdown
+            const countdownDisplay = document.getElementById('countdown-display');
+            countdownDisplay.innerHTML = renderCountdown(now);
+        }
+
+        // Initialize
+        loadState();
+        updateDisplay();
+        setInterval(updateDisplay, 1000);
+    </script>
+</body>
+</html>
