@@ -1,4 +1,4 @@
-const CACHE_NAME = 'casssino-v0.2.1';
+const CACHE_NAME = 'casssino-v0.2.2';
 const urlsToCache = [
   '/',
   '/index.html'
