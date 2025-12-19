@@ -206,6 +206,136 @@
             0% { filter: brightness(1); }
             100% { filter: brightness(1.2); }
         }
+        
+        /* Font Styles */
+        .font-style-default {
+            font-weight: 600;
+        }
+
+        .font-style-neon {
+            font-weight: 700;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #ff00ff;
+            animation: neon-flicker 2s infinite alternate;
+        }
+
+        /* @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        } */
+
+        .font-style-bold {
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .font-style-rainbow {
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 3s linear infinite;
+        }
+
+        /* @keyframes rainbow-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        } */
+
+        .font-style-elegant {
+            font-family: Georgia, serif;
+            font-weight: 300;
+            font-size: 22px;
+            letter-spacing: 3px;
+            font-style: italic;
+        }
+
+        .font-style-retro {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-shadow: 3px 3px 0px rgba(255, 0, 0, 0.5);
+        }
+
+        .font-style-glitch {
+            font-weight: 700;
+            position: relative;
+            animation: glitch-skew 1s infinite;
+        }
+
+        .font-style-glitch::before,
+        .font-style-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .font-style-glitch::before {
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+            color: #ff00ff;
+            z-index: -1;
+        }
+
+        .font-style-glitch::after {
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+            color: #00ffff;
+            z-index: -2;
+        }
+
+        /* @keyframes glitch-anim-1 {
+            0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
+            20% { clip-path: inset(92% 0 1% 0); transform: translate(2px, 0); }
+            40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, 0); }
+            60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, 0); }
+            80% { clip-path: inset(54% 0 7% 0); transform: translate(-2px, 0); }
+            100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 85% 0); transform: translate(2px, 0); }
+            20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); }
+            40% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
+            60% { clip-path: inset(30% 0 70% 0); transform: translate(-2px, 0); }
+            80% { clip-path: inset(65% 0 15% 0); transform: translate(2px, 0); }
+            100% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(2deg); }
+            30% { transform: skew(0deg); }
+        } */
+
+        .font-style-gradient {
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .font-style-fire {
+            font-weight: 700;
+            background: linear-gradient(180deg, #ff0000 0%, #ff7f00 50%, #ffff00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fire-flicker 0.5s infinite alternate;
+        }
+
+        /* @keyframes fire-flicker {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        } */
 
         /* Drawer */
         .drawer-overlay {
@@ -1038,6 +1168,25 @@
                     <option value="fire" id="logo-fire">Fire</option>
                 </select>
             </div>
+            
+            <!-- Font Style -->
+            <div class="setting-item" id="font-style-setting">
+                <div class="setting-label">
+                    <span class="setting-icon">✨</span>
+                    <span id="label-font-style">Font style</span>
+                </div>
+                <select id="font-style-select" onchange="changeFontStyle()">
+                    <option value="default" id="font-default">Default</option>
+                    <option value="neon" id="font-neon">Neon</option>
+                    <option value="bold" id="font-bold">Bold</option>
+                    <option value="rainbow" id="font-rainbow">Rainbow</option>
+                    <option value="elegant" id="font-elegant">Elegant</option>
+                    <option value="retro" id="font-retro">Retro</option>
+                    <option value="glitch" id="font-glitch">Glitch</option>
+                    <option value="gradient" id="font-gradient">Gradient</option>
+                    <option value="fire" id="font-fire">Fire</option>
+                </select>
+            </div>
 
             <!-- Show Current Time -->
             <div class="setting-item">
@@ -1149,7 +1298,7 @@
                 </select>
             </div>
             <div class="version">
-                Version 0.2.2
+                Version 0.2.3
             </div>
         </div>
     </div>
@@ -1160,16 +1309,16 @@
         <div id="clock-display"></div>
 
         <!-- Countdown Display -->
-        <div id="countdown-display"></div>
+        <div id="countdown-display" class="changableFont"></div>
 
         <!-- Counter Section -->
         <div class="counter-section" id="counter-section">
             <div class="card counter-container">
                 <div class="counter-header">
-                    <h4 class="counter-title" id="counter-title">Counter</h4>
+                    <h4 class="counter-title changableFont" id="counter-title">Counter</h4>
                     <div class="counter-reset-btn" onclick="resetCounter()">↻</div>
                 </div>
-                <div class="counter-display">
+                <div class="counter-display changableFont">
                     <div class="counter-btn" onclick="decrementCounter()">−</div>
                     <div class="counter-value" id="counter-value">8</div>
                     <div class="counter-btn" onclick="incrementCounter()">+</div>
@@ -1197,6 +1346,16 @@
                 logoGlitch: 'Glitch',
                 logoGradient: 'Gradient',
                 logoFire: 'Fire',
+                fontStyle: 'Font style',
+                fontDefault: 'Default',
+                fontNeon: 'Neon',
+                fontBold: 'Bold',
+                fontRainbow: 'Rainbow',
+                fontElegant: 'Elegant',
+                fontRetro: 'Retro',
+                fontGlitch: 'Glitch',
+                fontGradient: 'Gradient',
+                fontFire: 'Fire',
                 showCurrentTime: 'Show current time',
                 analogClock: 'Analog clock',
                 clockStyle: 'Clock style',
@@ -1253,6 +1412,16 @@
                 logoGlitch: 'Глітч',
                 logoGradient: 'Градієнт',
                 logoFire: 'Вогонь',
+                fontStyle: 'Стиль шрифту',
+                fontDefault: 'Стандартний',
+                fontNeon: 'Неон',
+                fontBold: 'Жирний',
+                fontRainbow: 'Веселка',
+                fontElegant: 'Елегантний',
+                fontRetro: 'Ретро',
+                fontGlitch: 'Глітч',
+                fontGradient: 'Градієнт',
+                fontFire: 'Вогонь',
                 showCurrentTime: 'Показувати поточний час',
                 analogClock: 'Аналоговий годинник',
                 clockStyle: 'Стиль годинника',
@@ -1309,6 +1478,16 @@
                 logoGlitch: 'Glitch',
                 logoGradient: 'Gradient',
                 logoFire: 'Oheň',
+                fontStyle: 'Styl písma',
+                fontDefault: 'Výchozí',
+                fontNeon: 'Neon',
+                fontBold: 'Tučný',
+                fontRainbow: 'Duha',
+                fontElegant: 'Elegantní',
+                fontRetro: 'Retro',
+                fontGlitch: 'Glitch',
+                fontGradient: 'Gradient',
+                fontFire: 'Oheň',
                 showCurrentTime: 'Zobrazit aktuální čas',
                 analogClock: 'Analogové hodiny',
                 clockStyle: 'Styl hodin',
@@ -1365,6 +1544,16 @@
                 logoGlitch: 'Глітч',
                 logoGradient: 'Градієнт',
                 logoFire: 'Агонь',
+                fontStyle: 'Стіль шрифту',
+                fontDefault: 'Стандартний',
+                fontNeon: 'Нєон',
+                fontBold: 'Жирний',
+                fontRainbow: 'Радуга',
+                fontElegant: 'Елєгантний',
+                fontRetro: 'Ретро',
+                fontGlitch: 'Глітч',
+                fontGradient: 'Градієнт',
+                fontFire: 'Агонь',
                 showCurrentTime: 'Показувать тєкущє врємя',
                 analogClock: 'Аналогові часи',
                 clockStyle: 'Стіль часів',
@@ -1422,6 +1611,7 @@
             selectedShift: 0,
             showLogo: true,
             logoStyle: 'default',
+            fontStyle: 'default',
             showCurrentTime: true,
             analogClock: true,
             clockStyle: 'modern',
@@ -1446,6 +1636,9 @@
 
             const savedLogoStyle = localStorage.getItem('logoStyle');
             if (savedLogoStyle !== null) state.logoStyle = savedLogoStyle;
+
+            const savedFontStyle = localStorage.getItem('fontStyle');
+            if (savedFontStyle !== null) state.fontStyle = savedFontStyle;
 
             const savedShowTime = localStorage.getItem('showCurrentTime');
             if (savedShowTime !== null) state.showCurrentTime = JSON.parse(savedShowTime);
@@ -1486,6 +1679,7 @@
             document.getElementById('shift-select').value = state.selectedShift;
             document.getElementById('show-logo-toggle').checked = state.showLogo;
             document.getElementById('logo-style-select').value = state.logoStyle;
+            document.getElementById('font-style-select').value = state.fontStyle;
             document.getElementById('show-time-toggle').checked = state.showCurrentTime;
             document.getElementById('analog-toggle').checked = state.analogClock;
             document.getElementById('clock-style-select').value = state.clockStyle;
@@ -1499,6 +1693,7 @@
             updateTranslations();
             updateCounter();
             updateLogo();
+            updateFont();
         }
 
         // Update visibility
@@ -1532,6 +1727,16 @@
             document.getElementById('logo-glitch').textContent = t.logoGlitch;
             document.getElementById('logo-gradient').textContent = t.logoGradient;
             document.getElementById('logo-fire').textContent = t.logoFire;
+            document.getElementById('label-font-style').textContent = t.fontStyle;
+            document.getElementById('font-default').textContent = t.fontDefault;
+            document.getElementById('font-neon').textContent = t.fontNeon;
+            document.getElementById('font-bold').textContent = t.fontBold;
+            document.getElementById('font-rainbow').textContent = t.fontRainbow;
+            document.getElementById('font-elegant').textContent = t.fontElegant;
+            document.getElementById('font-retro').textContent = t.fontRetro;
+            document.getElementById('font-glitch').textContent = t.fontGlitch;
+            document.getElementById('font-gradient').textContent = t.fontGradient;
+            document.getElementById('font-fire').textContent = t.fontFire;
             document.getElementById('label-show-time').textContent = t.showCurrentTime;
             document.getElementById('label-analog').textContent = t.analogClock;
             document.getElementById('label-clock-style').textContent = t.clockStyle;
@@ -1603,6 +1808,20 @@
             updateLogo();
         }
 
+        function changeFontStyle() {
+            let elementsToChange = document.getElementsByClassName('changableFont');
+            if (elementsToChange.length) {
+                Array.from(elementsToChange).forEach(el => {
+                    // Remove all font-style classes
+                    el.className = el.className.replace(/font-style-\S+/g, '').trim();
+                });
+            }
+
+            state.fontStyle = document.getElementById('font-style-select').value;
+            localStorage.setItem('fontStyle', state.fontStyle);
+            updateFont();
+        }
+
         function updateLogo() {
             const logo = document.getElementById('app-title');
             if (!state.showLogo) {
@@ -1627,6 +1846,37 @@
             } else {
                 logo.removeAttribute('data-text');
             }
+        }
+
+        function updateFont() {
+            // const logo = document.getElementById('app-title');
+            // if (!state.showLogo) {
+            //     logo.style.display = 'none';
+            //     return;
+            // }
+            // logo.style.display = 'block';
+
+            // Remove all logo style classes
+            // logo.className = '';
+            let elementsToChange = document.getElementsByClassName('changableFont');
+            if (elementsToChange.length > 0) {
+                Array.from(elementsToChange).forEach(el => el.classList.add(`font-style-${state.fontStyle}`));
+            }
+
+
+            // Add new style class
+            // if (state.logoStyle !== 'default') {
+            //     logo.classList.add(`logo-style-${state.logoStyle}`);
+            // } else {
+            //     logo.classList.add('logo-style-default');
+            // }
+
+            // // For glitch effect, we need the data-text attribute
+            // if (state.logoStyle === 'glitch') {
+            //     logo.setAttribute('data-text', logo.textContent);
+            // } else {
+            //     logo.removeAttribute('data-text');
+            // }
         }
 
         function toggleShowTime() {
@@ -1915,8 +2165,8 @@
                 let message = status === 'notStarted'
                     ? t.shiftNotStarted.replace('{name}', shift.name)
                     : t.shiftEnded.replace('{name}', shift.name);
-                return `<div class="card countdown-container">
-                    <div class="status-message">${message}</div>
+                return `<div class="card countdown-container ">
+                    <div class="status-message changableFont">${message}</div>
                 </div>`;
             }
 
@@ -1929,7 +2179,7 @@
             if (state.countdownStyle === 'digital') {
                 const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
                 return `<div class="card countdown-container">
-                    <h4 class="countdown-title">${t.shiftEnd}</h4>
+                    <h4 class="countdown-title ">${t.shiftEnd}</h4>
                     <div class="countdown-digital">${timeStr}</div>
                 </div>`;
             } else if (state.countdownStyle === 'cards') {
