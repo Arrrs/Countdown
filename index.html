@@ -223,23 +223,6 @@
             20%, 24%, 55% { text-shadow: 0 0 5px #00ff41, 0 0 10px #ff006e, 1px 1px 0 #ff006e; }
         }
 
-        .logo-style-sunset {
-            font-weight: 700;
-            font-size: 22px;
-            background: linear-gradient(90deg, #ff6b35 0%, #f7931e 25%, #fdb833 50%, #f4a261 75%, #e76f51 100%);
-            background-size: 200% auto;
-            background-position: 0% center;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: sunset-shift 4s linear infinite;
-        }
-
-        @keyframes sunset-shift {
-            0% { background-position: 0% center; }
-            100% { background-position: 100% center; }
-        }
-
         .logo-style-frosted {
             font-weight: 600;
             font-size: 24px;
@@ -250,16 +233,7 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
             padding: 8px 16px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1), 0 0 20px rgba(173, 216, 230, 0.3);
-        }
-
-        .logo-style-warm {
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: 1px;
-            color: #c17857;
-            text-shadow: 0 4px 12px rgba(193, 120, 87, 0.3), 0 0 20px rgba(230, 160, 110, 0.15);
         }
 
         .logo-style-minimal {
@@ -271,14 +245,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .logo-style-pastel {
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: 1px;
-            color: #a67fb8;
-            text-shadow: 0 4px 10px rgba(166, 127, 184, 0.2), 0 0 15px rgba(220, 198, 224, 0.1);
-        }
-        
         /* Font Styles */
         .font-style-default {
             font-weight: 600;
@@ -440,18 +406,6 @@
             animation: cyberpunk-flicker 0.15s infinite;
         }
 
-        .font-style-sunset {
-            font-weight: 700;
-            font-size: 18px;
-            background: linear-gradient(90deg, #ff6b35 0%, #f7931e 25%, #fdb833 50%, #f4a261 75%, #e76f51 100%);
-            background-size: 200% auto;
-            background-position: 0% center;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: sunset-shift 4s linear infinite;
-        }
-
         .font-style-frosted {
             font-weight: 600;
             font-size: 18px;
@@ -461,28 +415,12 @@
             filter: drop-shadow(0 0 6px rgba(173, 216, 230, 0.4));
         }
 
-        .font-style-warm {
-            font-weight: 600;
-            font-size: 18px;
-            color: #d4845c;
-            text-shadow: 0 2px 8px rgba(212, 132, 92, 0.3), 0 0 12px rgba(230, 160, 110, 0.2);
-            letter-spacing: 0.5px;
-        }
-
         .font-style-minimal-dark {
             font-weight: 400;
             font-size: 16px;
             color: #505050;
             letter-spacing: 0.3px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .font-style-pastel {
-            font-weight: 600;
-            font-size: 18px;
-            color: #b19cd9;
-            text-shadow: 0 2px 6px rgba(177, 156, 217, 0.2), 0 0 10px rgba(220, 198, 224, 0.15);
-            letter-spacing: 0.5px;
         }
 
         /* Drawer */
@@ -1514,11 +1452,8 @@
                     <option value="gradient" id="logo-gradient">Gradient</option>
                     <option value="fire" id="logo-fire">Fire</option>
                     <option value="cyberpunk" id="logo-cyberpunk">Cyberpunk</option>
-                    <option value="sunset" id="logo-sunset">Sunset</option>
                     <option value="frosted" id="logo-frosted">Frosted</option>
-                    <option value="warm" id="logo-warm">Warm</option>
                     <option value="minimal" id="logo-minimal">Minimal</option>
-                    <option value="pastel" id="logo-pastel">Pastel</option>
                 </select>
             </div>
             
@@ -1539,11 +1474,8 @@
                     <option value="gradient" id="font-gradient">Gradient</option>
                     <option value="fire" id="font-fire">Fire</option>
                     <option value="cyberpunk" id="font-cyberpunk">Cyberpunk</option>
-                    <option value="sunset" id="font-sunset">Sunset</option>
                     <option value="frosted" id="font-frosted">Frosted</option>
-                    <option value="warm" id="font-warm">Warm</option>
                     <option value="minimal-dark" id="font-minimal-dark">Minimal Dark</option>
-                    <option value="pastel" id="font-pastel">Pastel</option>
                 </select>
             </div>
 
@@ -1580,16 +1512,11 @@
                 <select id="clock-style-select" onchange="changeClockStyle()">
                     <option value="modern" id="style-modern">Modern</option>
                     <option value="classic" id="style-classic">Classic</option>
-                    <option value="minimal" id="style-minimal">Minimalist</option>
-                    <option value="elegant" id="style-elegant">Elegant</option>
                     <option value="neon" id="style-neon">Neon</option>
-                    <option value="simple" id="style-simple">Simple</option>
-                    <option value="bold" id="style-bold">Bold</option>
                     <option value="cyberpunk" id="style-cyberpunk">Cyberpunk</option>
                     <option value="sunset" id="style-sunset">Sunset</option>
                     <option value="frosted" id="style-frosted">Frosted</option>
                     <option value="cozy" id="style-cozy">Cozy</option>
-                    <option value="minimal-clock" id="style-minimal-clock">Minimal Clock</option>
                 </select>
             </div>
 
@@ -1631,14 +1558,10 @@
                     <option value="digital" id="countdown-digital">Digital</option>
                     <option value="cards" id="countdown-cards">Cards</option>
                     <option value="text" id="countdown-text">Text</option>
-                    <option value="progress" id="countdown-progress">Progress Bars</option>
                     <option value="circular" id="countdown-circular">Circular</option>
                     <option value="flip" id="countdown-flip">Flip Clock</option>
-                    <option value="compact" id="countdown-compact">Compact</option>
                     <option value="cyber" id="countdown-cyber">Cyberpunk</option>
-                    <option value="sunset" id="countdown-sunset">Sunset</option>
                     <option value="cozy" id="countdown-cozy">Cozy</option>
-                    <option value="minimalist" id="countdown-minimalist">Minimalist</option>
                 </select>
             </div>
 
@@ -1717,11 +1640,8 @@
                 logoGradient: 'Gradient',
                 logoFire: 'Fire',
                 logoCyberpunk: 'Cyberpunk',
-                logoSunset: 'Sunset',
                 logoFrosted: 'Frosted',
-                logoWarm: 'Warm',
                 logoMinimal: 'Minimal',
-                logoPastel: 'Pastel',
                 fontStyle: 'Font style',
                 fontDefault: 'Default',
                 fontNeon: 'Neon',
@@ -1733,26 +1653,18 @@
                 fontGradient: 'Gradient',
                 fontFire: 'Fire',
                 fontCyberpunk: 'Cyberpunk',
-                fontSunset: 'Sunset',
                 fontFrosted: 'Frosted',
-                fontWarm: 'Warm',
                 fontMinimalDark: 'Minimal Dark',
-                fontPastel: 'Pastel',
                 showCurrentTime: 'Show current time',
                 analogClock: 'Analog clock',
                 clockStyle: 'Clock style',
                 modern: 'Modern',
                 classic: 'Classic',
-                minimal: 'Minimalist',
-                elegant: 'Elegant',
                 neon: 'Neon',
-                simple: 'Simple',
-                bold: 'Bold',
                 clockCyberpunk: 'Cyberpunk',
                 clockSunset: 'Sunset',
                 clockFrosted: 'Frosted',
                 clockCozy: 'Cozy',
-                clockMinimalClock: 'Minimal Clock',
                 showNumbers: 'Show numbers',
                 digitalTimeStyle: 'Digital clock style',
                 digitalTimeDefault: 'Default',
@@ -1767,14 +1679,10 @@
                 digital: 'Digital',
                 cards: 'Cards',
                 text: 'Text',
-                progress: 'Progress Bars',
                 circular: 'Circular',
                 flip: 'Flip Clock',
-                compact: 'Compact',
                 cyber: 'Cyberpunk',
-                sunset: 'Sunset',
                 cozy: 'Cozy',
-                minimalist: 'Minimalist',
                 language: 'Language',
                 currentTime: 'Current time',
                 shiftEnd: 'Until shift end',
@@ -1806,11 +1714,8 @@
                 logoGradient: 'Градієнт',
                 logoFire: 'Вогонь',
                 logoCyberpunk: 'Кіберпанк',
-                logoSunset: 'Захід сонця',
                 logoFrosted: 'Морозний',
-                logoWarm: 'Теплий',
                 logoMinimal: 'Мінімалістичний',
-                logoPastel: 'Пастель',
                 fontStyle: 'Стиль шрифту',
                 fontDefault: 'Стандартний',
                 fontNeon: 'Неон',
@@ -1822,26 +1727,18 @@
                 fontGradient: 'Градієнт',
                 fontFire: 'Вогонь',
                 fontCyberpunk: 'Кіберпанк',
-                fontSunset: 'Захід сонця',
                 fontFrosted: 'Морозний',
-                fontWarm: 'Теплий',
                 fontMinimalDark: 'Мінімальний Темний',
-                fontPastel: 'Пастель',
                 showCurrentTime: 'Показувати поточний час',
                 analogClock: 'Аналоговий годинник',
                 clockStyle: 'Стиль годинника',
                 modern: 'Сучасний',
                 classic: 'Класичний',
-                minimal: 'Мінімалістичний',
-                elegant: 'Елегантний',
                 neon: 'Неон',
-                simple: 'Простий',
-                bold: 'Жирний',
                 clockCyberpunk: 'Кіберпанк',
                 clockSunset: 'Захід сонця',
                 clockFrosted: 'Морозний',
                 clockCozy: 'Затишний',
-                clockMinimalClock: 'Мінімальний Годинник',
                 showNumbers: 'Показувати цифри',
                 digitalTimeStyle: 'Стиль цифрового годинника',
                 digitalTimeDefault: 'Стандартний',
@@ -1856,14 +1753,10 @@
                 digital: 'Цифровий',
                 cards: 'Картки',
                 text: 'Текстовий',
-                progress: 'Прогрес бари',
                 circular: 'Круговий',
                 flip: 'Перекидний',
-                compact: 'Компактний',
                 cyber: 'Кіберпанк',
-                sunset: 'Захід сонця',
                 cozy: 'Затишний',
-                minimalist: 'Мінімалістичний',
                 language: 'Мова',
                 currentTime: 'Поточний час',
                 shiftEnd: 'До кінця зміни',
@@ -1895,11 +1788,8 @@
                 logoGradient: 'Gradient',
                 logoFire: 'Oheň',
                 logoCyberpunk: 'Kyberpunk',
-                logoSunset: 'Západ slunce',
                 logoFrosted: 'Zmrazený',
-                logoWarm: 'Teplý',
                 logoMinimal: 'Minimální',
-                logoPastel: 'Pastel',
                 fontStyle: 'Styl písma',
                 fontDefault: 'Výchozí',
                 fontNeon: 'Neon',
@@ -1911,26 +1801,18 @@
                 fontGradient: 'Gradient',
                 fontFire: 'Oheň',
                 fontCyberpunk: 'Kyberpunk',
-                fontSunset: 'Západ slunce',
                 fontFrosted: 'Zmrazený',
-                fontWarm: 'Teplý',
                 fontMinimalDark: 'Minim. Tmavý',
-                fontPastel: 'Pastel',
                 showCurrentTime: 'Zobrazit aktuální čas',
                 analogClock: 'Analogové hodiny',
                 clockStyle: 'Styl hodin',
                 modern: 'Moderní',
                 classic: 'Klasický',
-                minimal: 'Minimalistický',
-                elegant: 'Elegantní',
                 neon: 'Neon',
-                simple: 'Jednoduchý',
-                bold: 'Tučný',
                 clockCyberpunk: 'Kyberpunk',
                 clockSunset: 'Západ slunce',
                 clockFrosted: 'Zmrazený',
                 clockCozy: 'Pohodlný',
-                clockMinimalClock: 'Minim. Hodiny',
                 showNumbers: 'Zobrazit čísla',
                 digitalTimeStyle: 'Styl digitálních hodin',
                 digitalTimeDefault: 'Výchozí',
@@ -1945,14 +1827,10 @@
                 digital: 'Digitální',
                 cards: 'Karty',
                 text: 'Textový',
-                progress: 'Ukazatele průběhu',
                 circular: 'Kruhový',
                 flip: 'Překlopení',
-                compact: 'Kompaktní',
                 cyber: 'Kyberpunk',
-                sunset: 'Západ slunce',
                 cozy: 'Pohodlný',
-                minimalist: 'Minimalistický',
                 language: 'Jazyk',
                 currentTime: 'Aktuální čas',
                 shiftEnd: 'Do konce směny',
@@ -1984,11 +1862,8 @@
                 logoGradient: 'Градієнт',
                 logoFire: 'Агонь',
                 logoCyberpunk: 'Кіберпанк',
-                logoSunset: 'Захід сонця',
                 logoFrosted: 'Морозний',
-                logoWarm: 'Теплий',
                 logoMinimal: 'Мінімальний',
-                logoPastel: 'Пастель',
                 fontStyle: 'Стіль шрифту',
                 fontDefault: 'Стандартний',
                 fontNeon: 'Нєон',
@@ -2000,26 +1875,18 @@
                 fontGradient: 'Градієнт',
                 fontFire: 'Агонь',
                 fontCyberpunk: 'Кіберпанк',
-                fontSunset: 'Захід сонця',
                 fontFrosted: 'Морозний',
-                fontWarm: 'Теплий',
                 fontMinimalDark: 'Мін. Темний',
-                fontPastel: 'Пастель',
                 showCurrentTime: 'Показувать тєкущє врємя',
                 analogClock: 'Аналогові часи',
                 clockStyle: 'Стіль часів',
                 modern: 'Соврємєнний',
                 classic: 'Класічєский',
-                minimal: 'Мінімалістічєский',
-                elegant: 'Елєгантний',
                 neon: 'Нєон',
-                simple: 'Простий',
-                bold: 'Жирний',
                 clockCyberpunk: 'Кіберпанк',
                 clockSunset: 'Захід сонця',
                 clockFrosted: 'Морозний',
                 clockCozy: 'Уютний',
-                clockMinimalClock: 'Мін. Часи',
                 showNumbers: 'Показувать цифри',
                 digitalTimeStyle: 'Стіль цифрових часів',
                 digitalTimeDefault: 'Стандартний',
@@ -2034,14 +1901,10 @@
                 digital: 'Цифровий',
                 cards: 'Карточний',
                 text: 'Тєкстовий',
-                progress: 'Прогрес бари',
                 circular: 'Круглий',
                 flip: 'Перекидающийся',
-                compact: 'Компактний',
                 cyber: 'Кіберпанк',
-                sunset: 'Захід сонця',
                 cozy: 'Уютний',
-                minimalist: 'Мінімалістічний',
                 language: 'Лангуаге',
                 currentTime: 'Тєкуущє врємя',
                 shiftEnd: 'До кінця зміни',
@@ -2316,26 +2179,34 @@
         function updateFont() {
             const elementsToChange = document.getElementsByClassName('changableFont');
             if (elementsToChange.length > 0) {
+                const targetClass = state.fontStyle !== 'default' ? `font-style-${state.fontStyle}` : 'font-style-default';
+
                 Array.from(elementsToChange).forEach(el => {
-                    // Remove all font-style-* classes
-                    el.classList.forEach(className => {
-                        if (className.startsWith('font-style-')) {
-                            el.classList.remove(className);
-                        }
-                    });
-                    
-                    // Add new style class
-                    if (state.fontStyle !== 'default') {
-                        el.classList.add(`font-style-${state.fontStyle}`);
-                    } else {
-                        el.classList.add('font-style-default');
+                    // Only update if the element doesn't already have the correct class
+                    const hasCorrectClass = el.classList.contains(targetClass);
+
+                    if (!hasCorrectClass) {
+                        // Remove all font-style-* classes
+                        el.classList.forEach(className => {
+                            if (className.startsWith('font-style-')) {
+                                el.classList.remove(className);
+                            }
+                        });
+
+                        // Add new style class
+                        el.classList.add(targetClass);
                     }
-                    
+
                     // For glitch effect, we need the data-text attribute
+                    // Only set it if it's missing or different
                     if (state.fontStyle === 'glitch') {
-                        el.setAttribute('data-text', el.textContent);
+                        if (el.getAttribute('data-text') !== el.textContent) {
+                            el.setAttribute('data-text', el.textContent);
+                        }
                     } else {
-                        el.removeAttribute('data-text');
+                        if (el.hasAttribute('data-text')) {
+                            el.removeAttribute('data-text');
+                        }
                     }
                 });
             }
@@ -2513,8 +2384,6 @@
                 handColor = '#ffffff';
             } else if (style === 'cozy') {
                 handColor = '#c17857';
-            } else if (style === 'minimal-clock') {
-                handColor = '#505050';
             }
 
             let svg = `<svg width="${clockSize}" height="${clockSize}">`;
@@ -2586,21 +2455,20 @@
             }
 
             // Clock face
-            const strokeWidth = style === 'classic' ? 4 : style === 'bold' ? 5 : style === 'elegant' ? 1 : style === 'minimal-clock' ? 1 : 2;
+            const strokeWidth = style === 'classic' ? 4 : 2;
             svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${clockSize/2 - 10}"
                 fill="${circleColor}" stroke="${strokeColor}" stroke-width="${strokeWidth}"/>`;
 
-            // Numbers - use Roman numerals for elegant style
-            if (state.showNumbers && style !== 'simple' && style !== 'minimal-clock') {
-                const romanNumerals = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+            // Numbers
+            if (state.showNumbers) {
                 for (let i = 0; i < 12; i++) {
-                    const num = style === 'elegant' ? romanNumerals[i] : (i === 0 ? 12 : i);
+                    const num = (i === 0 ? 12 : i);
                     const angle = (i * 30 - 90) * (Math.PI / 180);
                     const radius = clockSize/2 - 35;
                     const x = clockSize/2 + radius * Math.cos(angle);
                     const y = clockSize/2 + radius * Math.sin(angle);
-                    const fontSize = style === 'minimal' ? 14 : style === 'bold' ? 22 : style === 'elegant' ? 16 : style === 'cozy' ? 16 : 18;
-                    const fontWeight = style === 'classic' || style === 'bold' ? 'bold' : style === 'elegant' ? '300' : 'normal';
+                    const fontSize = style === 'cozy' ? 16 : 18;
+                    const fontWeight = style === 'classic' ? 'bold' : 'normal';
                     const numColor = style === 'neon' ? '#00ffff' : style === 'cyberpunk' ? '#00ff41' : style === 'sunset' ? '#ff6b35' : style === 'frosted' ? '#ffffff' : style === 'cozy' ? '#c17857' : textColor;
                     const filter = (style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted') ? 'filter="url(#glow)"' : '';
                     svg += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle"
@@ -2611,14 +2479,14 @@
             }
 
             // First, draw minute marks (smaller marks)
-            if (style !== 'minimal' && style !== 'simple' && style !== 'minimal-clock') {
+            {
                 for (let i = 0; i < 60; i++) {
                     // Skip hour marks for now - we'll draw them separately
                     if (i % 5 === 0) continue;
-                    
+
                     const angle = (i * 6 - 90) * (Math.PI / 180);
                     const outerRadius = clockSize/2 - 10;
-                    const minuteMarkLength = style === 'elegant' ? 4 : 6;
+                    const minuteMarkLength = 6;
                     const innerRadius = outerRadius - minuteMarkLength;
                     const x1 = clockSize/2 + outerRadius * Math.cos(angle) + 0.5;
                     const y1 = clockSize/2 + outerRadius * Math.sin(angle) + 0.5;
@@ -2635,19 +2503,17 @@
                     const angle = (i * 6 - 90) * (Math.PI / 180);
                     const outerRadius = clockSize/2 - 10;
                     let hourMarkLength = 12;
-                    if (style === 'bold') hourMarkLength = 16;
-                    else if (style === 'classic') hourMarkLength = 14;
-                    else if (style === 'elegant') hourMarkLength = 10;
+                    if (style === 'classic') hourMarkLength = 14;
                     else if (style === 'neon' || style === 'cyberpunk' || style === 'sunset') hourMarkLength = 14;
                     else if (style === 'frosted' || style === 'cozy') hourMarkLength = 12;
-                    
+
                     const innerRadius = outerRadius - hourMarkLength;
                     const x1 = clockSize/2 + outerRadius * Math.cos(angle) + 0.5;
                     const y1 = clockSize/2 + outerRadius * Math.sin(angle) + 0.5;
                     const x2 = clockSize/2 + innerRadius * Math.cos(angle) + 0.5;
                     const y2 = clockSize/2 + innerRadius * Math.sin(angle) + 0.5;
                     const markStroke = style === 'neon' ? '#00ffff' : style === 'cyberpunk' ? '#00ff41' : style === 'sunset' ? '#ff6b35' : style === 'frosted' ? '#ffffff' : style === 'cozy' ? '#c17857' : markColor;
-                    const markWidth = style === 'bold' ? 3 : style === 'neon' ? 2.5 : style === 'cyberpunk' ? 2.5 : 2;
+                    const markWidth = style === 'neon' ? 2.5 : style === 'cyberpunk' ? 2.5 : 2;
                     const shouldGlow = style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted' || style === 'cozy';
                     const filterAttr = shouldGlow ? 'filter="url(#glow)"' : '';
                     svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"
@@ -2659,7 +2525,7 @@
             const hourLength = clockSize * 0.28;
             const hourX = clockSize/2 + hourLength * Math.cos((hourDeg - 90) * Math.PI / 180);
             const hourY = clockSize/2 + hourLength * Math.sin((hourDeg - 90) * Math.PI / 180);
-            const hourWidth = style === 'classic' ? 8 : style === 'bold' ? 10 : style === 'elegant' ? 3 : style === 'simple' ? 4 : 6;
+            const hourWidth = style === 'classic' ? 8 : 6;
             const hourFilter = (style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted') ? 'filter="url(#glow)"' : '';
             svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${hourX}" y2="${hourY}"
                 stroke="${handColor}" stroke-width="${hourWidth}" stroke-linecap="round" ${hourFilter}/>`;
@@ -2668,32 +2534,28 @@
             const minuteLength = clockSize * 0.40;
             const minuteX = clockSize/2 + minuteLength * Math.cos((minuteDeg - 90) * Math.PI / 180);
             const minuteY = clockSize/2 + minuteLength * Math.sin((minuteDeg - 90) * Math.PI / 180);
-            const minuteWidth = style === 'classic' ? 6 : style === 'bold' ? 8 : style === 'elegant' ? 2 : style === 'simple' ? 3 : 4;
+            const minuteWidth = style === 'classic' ? 6 : 4;
             const minuteFilter = (style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted') ? 'filter="url(#glow)"' : '';
             svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${minuteX}" y2="${minuteY}"
                 stroke="${handColor}" stroke-width="${minuteWidth}" stroke-linecap="round" ${minuteFilter}/>`;
 
             // Center dot
-            const centerSize = style === 'classic' || style === 'bold' ? 8 : style === 'elegant' ? 4 : 6;
+            const centerSize = style === 'classic' ? 8 : 6;
             const centerColor = style === 'neon' ? '#00ffff' : style === 'cyberpunk' ? '#00ff41' : style === 'sunset' ? '#ff6b35' : handColor;
             const centerFilter = (style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted') ? 'filter="url(#glow)"' : '';
             svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="${centerSize}" fill="${centerColor}" ${centerFilter}/>`;
-            if (style !== 'simple' && style !== 'minimal-clock') {
-                const dotColor = style === 'neon' ? '#ff00ff' : style === 'cyberpunk' ? '#ff006e' : style === 'sunset' ? '#e76f51' : style === 'cozy' ? '#e8a894' : '#ff4d4f';
-                svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="3" fill="${dotColor}"/>`;
-            }
+            const dotColor = style === 'neon' ? '#ff00ff' : style === 'cyberpunk' ? '#ff006e' : style === 'sunset' ? '#e76f51' : style === 'cozy' ? '#e8a894' : '#ff4d4f';
+            svg += `<circle cx="${clockSize/2}" cy="${clockSize/2}" r="3" fill="${dotColor}"/>`;
 
-            // Second hand (skip for minimal style) - drawn LAST so it always appears on top
-            if (style !== 'minimal') {
-                const secondLength = clockSize * 0.44;
-                const secondX = clockSize/2 + secondLength * Math.cos((secondDeg - 90) * Math.PI / 180) + 0.5;
-                const secondY = clockSize/2 + secondLength * Math.sin((secondDeg - 90) * Math.PI / 180) + 0.5;
-                const secondColor = style === 'neon' ? '#ff00ff' : style === 'cyberpunk' ? '#ff006e' : style === 'sunset' ? '#e76f51' : style === 'frosted' ? '#e0e0e0' : style === 'cozy' ? '#e8a894' : '#ff4d4f';
-                const secondWidth = style === 'bold' ? 3 : 2.5;
-                const secondFilter = (style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted') ? 'filter="url(#glow)"' : '';
-                svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${secondX}" y2="${secondY}"
-                    stroke="${secondColor}" stroke-width="${secondWidth}" stroke-linecap="round" stroke-linejoin="round" opacity="1" ${secondFilter}/>`;
-            }
+            // Second hand - drawn LAST so it always appears on top
+            const secondLength = clockSize * 0.44;
+            const secondX = clockSize/2 + secondLength * Math.cos((secondDeg - 90) * Math.PI / 180) + 0.5;
+            const secondY = clockSize/2 + secondLength * Math.sin((secondDeg - 90) * Math.PI / 180) + 0.5;
+            const secondColor = style === 'neon' ? '#ff00ff' : style === 'cyberpunk' ? '#ff006e' : style === 'sunset' ? '#e76f51' : style === 'frosted' ? '#e0e0e0' : style === 'cozy' ? '#e8a894' : '#ff4d4f';
+            const secondWidth = 2.5;
+            const secondFilter = (style === 'neon' || style === 'cyberpunk' || style === 'sunset' || style === 'frosted') ? 'filter="url(#glow)"' : '';
+            svg += `<line x1="${clockSize/2}" y1="${clockSize/2}" x2="${secondX}" y2="${secondY}"
+                stroke="${secondColor}" stroke-width="${secondWidth}" stroke-linecap="round" stroke-linejoin="round" opacity="1" ${secondFilter}/>`;
             svg += `</svg>`;
 
             return `<div class="card transparent clock-container">
@@ -2763,46 +2625,6 @@
                 return `<div class="card countdown-container">
                     <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
                     <div class="countdown-text changableFont">${hoursText}${minutes} ${t.minutesShort} ${seconds} ${t.secondsShort}</div>
-                </div>`;
-            } else if (state.countdownStyle === 'progress') {
-                const shift = shifts[state.selectedShift];
-                const totalDuration = (shift.name === 'D12' || shift.name === 'N12') ? 12 : 8;
-                const totalMs = totalDuration * 3600000;
-                const elapsed = totalMs - diff;
-                const hoursPercent = ((totalDuration - hours) / totalDuration) * 100;
-                const minutesPercent = ((60 - minutes) / 60) * 100;
-                const secondsPercent = ((60 - seconds) / 60) * 100;
-                return `<div class="card countdown-container">
-                    <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
-                    <div class="countdown-progress">
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <span class="changableFont">${t.hours}</span>
-                                <span class="changableFont">${hours}</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill hours" style="width: ${hoursPercent}%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <span class="changableFont">${t.minutes}</span>
-                                <span class="changableFont">${minutes}</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill minutes" style="width: ${minutesPercent}%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <span class="changableFont">${t.seconds}</span>
-                                <span class="changableFont">${seconds}</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill seconds" style="width: ${secondsPercent}%"></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>`;
             } else if (state.countdownStyle === 'circular') {
                 const hoursMax = (shifts[state.selectedShift].name === 'D12' || shifts[state.selectedShift].name === 'N12') ? 12 : 8;
@@ -2888,15 +2710,6 @@
                         </div>
                     </div>
                 </div>`;
-            } else if (state.countdownStyle === 'compact') {
-                return `<div class="card countdown-container">
-                    <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
-                    <div class="countdown-compact">
-                        ${hours > 0 ? `<span class="compact-segment"><span class="value changableFont">${hours}</span><span class="label changableFont">${t.hoursShort}</span></span>` : ''}
-                        <span class="compact-segment"><span class="value changableFont">${minutes}</span><span class="label changableFont">${t.minutesShort}</span></span>
-                        <span class="compact-segment"><span class="value changableFont">${seconds}</span><span class="label changableFont">${t.secondsShort}</span></span>
-                    </div>
-                </div>`;
             } else if (state.countdownStyle === 'cyber') {
                 return `<div class="card countdown-container">
                     <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
@@ -2906,15 +2719,6 @@
                         <div class="cyber-item"><div class="cyber-value changableFont">${String(seconds).padStart(2, '0')}</div><div class="cyber-label changableFont">${t.seconds}</div></div>
                     </div>
                 </div>`;
-            } else if (state.countdownStyle === 'sunset') {
-                return `<div class="card countdown-container">
-                    <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
-                    <div class="countdown-sunset">
-                        ${hours > 0 ? `<div class="sunset-item"><div class="sunset-value changableFont">${String(hours).padStart(2, '0')}</div><div class="sunset-label changableFont">${t.hours}</div></div>` : ''}
-                        <div class="sunset-item"><div class="sunset-value changableFont">${String(minutes).padStart(2, '0')}</div><div class="sunset-label changableFont">${t.minutes}</div></div>
-                        <div class="sunset-item"><div class="sunset-value changableFont">${String(seconds).padStart(2, '0')}</div><div class="sunset-label changableFont">${t.seconds}</div></div>
-                    </div>
-                </div>`;
             } else if (state.countdownStyle === 'cozy') {
                 return `<div class="card countdown-container">
                     <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
@@ -2922,15 +2726,6 @@
                         ${hours > 0 ? `<div class="cozy-item"><div class="cozy-value changableFont">${String(hours).padStart(2, '0')}</div><div class="cozy-label changableFont">${t.hours}</div></div>` : ''}
                         <div class="cozy-item"><div class="cozy-value changableFont">${String(minutes).padStart(2, '0')}</div><div class="cozy-label changableFont">${t.minutes}</div></div>
                         <div class="cozy-item"><div class="cozy-value changableFont">${String(seconds).padStart(2, '0')}</div><div class="cozy-label changableFont">${t.seconds}</div></div>
-                    </div>
-                </div>`;
-            } else if (state.countdownStyle === 'minimalist') {
-                return `<div class="card countdown-container">
-                    <h4 class="countdown-title changableFont">${t.shiftEnd}</h4>
-                    <div class="countdown-minimalist">
-                        ${hours > 0 ? `<div class="minimalist-item"><div class="minimalist-value changableFont">${String(hours).padStart(2, '0')}</div><div class="minimalist-label changableFont">${t.hours}</div></div>` : ''}
-                        <div class="minimalist-item"><div class="minimalist-value changableFont">${String(minutes).padStart(2, '0')}</div><div class="minimalist-label changableFont">${t.minutes}</div></div>
-                        <div class="minimalist-item"><div class="minimalist-value changableFont">${String(seconds).padStart(2, '0')}</div><div class="minimalist-label changableFont">${t.seconds}</div></div>
                     </div>
                 </div>`;
             } else {
