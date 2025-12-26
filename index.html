@@ -601,6 +601,25 @@
             color: #ffffff;
         }
 
+        /* Color Input */
+        input[type="color"] {
+            width: 100%;
+            height: 40px;
+            padding: 4px;
+            border-radius: 6px;
+            border: 1px solid;
+            cursor: pointer;
+            background-color: transparent;
+        }
+
+        .light input[type="color"] {
+            border-color: #d9d9d9;
+        }
+
+        .dark input[type="color"] {
+            border-color: #434343;
+        }
+
         .secondary-text {
             opacity: 0.65;
             font-size: 13px;
@@ -1396,16 +1415,34 @@
             <span style="position: absolute; right: 16px; cursor: pointer; font-size: 24px;" ontouchstart="closeDrawer()" onclick="closeDrawer()">×</span>
         </div>
         <div class="drawer-content">
-            <!-- Dark Theme -->
+            <!-- Theme -->
             <div class="setting-item">
                 <div class="setting-label">
                     <span class="setting-icon">🎨</span>
-                    <span id="label-dark-theme">Dark theme</span>
+                    <span id="label-theme">Theme</span>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode()" checked>
-                    <span class="slider"></span>
-                </label>
+                <select id="theme-select" onchange="changeTheme()">
+                    <option value="dark" id="theme-dark">Dark</option>
+                    <option value="light" id="theme-light">Light</option>
+                    <option value="custom" id="theme-custom">Custom</option>
+                </select>
+            </div>
+
+            <!-- Custom Colors (hidden by default) -->
+            <div class="setting-item" id="custom-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-bg-color">Background Color</span>
+                </div>
+                <input type="color" id="custom-bg-color" onchange="changeCustomBgColor()" value="#000000">
+            </div>
+
+            <div class="setting-item" id="custom-card-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-card-bg-color">Card Background</span>
+                </div>
+                <input type="color" id="custom-card-bg-color" onchange="changeCustomCardBgColor()" value="#1f1f1f">
             </div>
 
             <!-- Shift -->
@@ -1626,7 +1663,12 @@
             en: {
                 app: 'Casssino',
                 settings: 'Settings',
-                darkTheme: 'Dark theme',
+                theme: 'Theme',
+                themeDark: 'Dark',
+                themeLight: 'Light',
+                themeCustom: 'Custom',
+                bgColor: 'Background Color',
+                cardBgColor: 'Card Background',
                 shift: 'Shift',
                 showLogo: 'Show logo',
                 logoStyle: 'Logo style',
@@ -1700,7 +1742,12 @@
             uk: {
                 app: 'Casssino',
                 settings: 'Налаштування',
-                darkTheme: 'Темна тема',
+                theme: 'Тема',
+                themeDark: 'Темна',
+                themeLight: 'Світла',
+                themeCustom: 'Власна',
+                bgColor: 'Колір фону',
+                cardBgColor: 'Фон карток',
                 shift: 'Зміна',
                 showLogo: 'Показувати логотип',
                 logoStyle: 'Стиль логотипу',
@@ -1774,7 +1821,12 @@
             cs: {
                 app: 'Casssino',
                 settings: 'Nastavení',
-                darkTheme: 'Tmavý režim',
+                theme: 'Téma',
+                themeDark: 'Tmavé',
+                themeLight: 'Světlé',
+                themeCustom: 'Vlastní',
+                bgColor: 'Barva pozadí',
+                cardBgColor: 'Pozadí karet',
                 shift: 'Směna',
                 showLogo: 'Zobrazit logo',
                 logoStyle: 'Styl loga',
@@ -1848,7 +1900,12 @@
             bc: {
                 app: 'Казззіно',
                 settings: 'Настройки',
-                darkTheme: 'Темна тєма',
+                theme: 'Тєма',
+                themeDark: 'Темна',
+                themeLight: 'Свєтлая',
+                themeCustom: 'Своя',
+                bgColor: 'Цвєт фона',
+                cardBgColor: 'Фон карточок',
                 shift: 'Зміна',
                 showLogo: 'Показувать логотіп',
                 logoStyle: 'Стіль логотіпа',
@@ -1933,6 +1990,9 @@
         // State
         let state = {
             darkMode: true,
+            themeMode: 'dark', // 'dark', 'light', or 'custom'
+            customBgColor: '#000000',
+            customCardBgColor: '#1f1f1f',
             selectedShift: 0,
             showLogo: true,
             logoStyle: 'default',
@@ -1952,6 +2012,15 @@
         function loadState() {
             const savedDarkMode = localStorage.getItem('darkMode');
             if (savedDarkMode !== null) state.darkMode = JSON.parse(savedDarkMode);
+
+            const savedThemeMode = localStorage.getItem('themeMode');
+            if (savedThemeMode !== null) state.themeMode = savedThemeMode;
+
+            const savedCustomBgColor = localStorage.getItem('customBgColor');
+            if (savedCustomBgColor !== null) state.customBgColor = savedCustomBgColor;
+
+            const savedCustomCardBgColor = localStorage.getItem('customCardBgColor');
+            if (savedCustomCardBgColor !== null) state.customCardBgColor = savedCustomCardBgColor;
 
             const savedShift = localStorage.getItem('selectedShift');
             if (savedShift !== null) state.selectedShift = JSON.parse(savedShift);
@@ -2019,8 +2088,9 @@
 
         // Apply state to UI
         function applyState() {
-            document.body.className = state.darkMode ? 'dark' : 'light';
-            document.getElementById('dark-mode-toggle').checked = state.darkMode;
+            document.getElementById('theme-select').value = state.themeMode;
+            document.getElementById('custom-bg-color').value = state.customBgColor;
+            document.getElementById('custom-card-bg-color').value = state.customCardBgColor;
             document.getElementById('shift-select').value = state.selectedShift;
             document.getElementById('show-logo-toggle').checked = state.showLogo;
             document.getElementById('logo-style-select').value = state.logoStyle;
@@ -2034,6 +2104,7 @@
             document.getElementById('language-select').value = state.language;
             document.getElementById('show-counter-toggle').checked = state.showCounter;
 
+            applyTheme();
             updateVisibility();
             updateTranslations();
             updateCounter();
@@ -2043,6 +2114,8 @@
 
         // Update visibility
         function updateVisibility() {
+            document.getElementById('custom-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
+            document.getElementById('custom-card-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
             document.getElementById('logo-style-setting').style.display = state.showLogo ? 'block' : 'none';
             document.getElementById('analog-setting').style.display = state.showCurrentTime ? 'block' : 'none';
             document.getElementById('clock-style-setting').style.display =
@@ -2059,7 +2132,12 @@
             const t = translations[state.language];
             document.getElementById('app-title').textContent = t.app;
             document.getElementById('settings-title').textContent = t.settings;
-            document.getElementById('label-dark-theme').textContent = t.darkTheme;
+            document.getElementById('label-theme').textContent = t.theme;
+            if (document.getElementById('theme-dark')) document.getElementById('theme-dark').textContent = t.themeDark;
+            if (document.getElementById('theme-light')) document.getElementById('theme-light').textContent = t.themeLight;
+            if (document.getElementById('theme-custom')) document.getElementById('theme-custom').textContent = t.themeCustom;
+            if (document.getElementById('label-bg-color')) document.getElementById('label-bg-color').textContent = t.bgColor;
+            if (document.getElementById('label-card-bg-color')) document.getElementById('label-card-bg-color').textContent = t.cardBgColor;
             document.getElementById('label-shift').textContent = t.shift;
             document.getElementById('label-show-logo').textContent = t.showLogo;
             document.getElementById('label-logo-style').textContent = t.logoStyle;
@@ -2121,8 +2199,19 @@
 
         // Toggle functions
         function toggleDrawer() {
-            document.getElementById('drawer').classList.toggle('open');
-            document.getElementById('drawer-overlay').classList.toggle('open');
+            const isOpen = document.getElementById('drawer').classList.contains('open');
+            if (!isOpen) {
+                openDrawer();
+            } else {
+                closeDrawer();
+            }
+        }
+
+        function openDrawer() {
+            document.getElementById('drawer').classList.add('open');
+            document.getElementById('drawer-overlay').classList.add('open');
+            // Push a new history state when opening drawer
+            history.pushState({ drawerOpen: true }, '');
         }
 
         function closeDrawer() {
@@ -2130,10 +2219,50 @@
             document.getElementById('drawer-overlay').classList.remove('open');
         }
 
-        function toggleDarkMode() {
-            state.darkMode = !state.darkMode;
+        function changeTheme() {
+            state.themeMode = document.getElementById('theme-select').value;
+            localStorage.setItem('themeMode', state.themeMode);
+
+            // Update darkMode for backward compatibility
+            state.darkMode = (state.themeMode === 'dark' || state.themeMode === 'custom');
             localStorage.setItem('darkMode', JSON.stringify(state.darkMode));
-            document.body.className = state.darkMode ? 'dark' : 'light';
+
+            applyTheme();
+            updateVisibility();
+        }
+
+        function changeCustomBgColor() {
+            state.customBgColor = document.getElementById('custom-bg-color').value;
+            localStorage.setItem('customBgColor', state.customBgColor);
+            applyTheme();
+        }
+
+        function changeCustomCardBgColor() {
+            state.customCardBgColor = document.getElementById('custom-card-bg-color').value;
+            localStorage.setItem('customCardBgColor', state.customCardBgColor);
+            applyTheme();
+        }
+
+        function applyTheme() {
+            if (state.themeMode === 'custom') {
+                document.body.className = 'dark'; // Use dark class for text colors
+                document.body.style.backgroundColor = state.customBgColor;
+
+                // Apply custom card backgrounds
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    card.style.backgroundColor = state.customCardBgColor;
+                });
+            } else {
+                document.body.className = state.themeMode;
+                document.body.style.backgroundColor = '';
+
+                // Reset card backgrounds
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    card.style.backgroundColor = '';
+                });
+            }
         }
 
         function changeShift() {
@@ -2780,6 +2909,63 @@
         loadState();
         updateDisplay();
         setInterval(updateDisplay, 1000);
+
+        // Handle browser back button for drawer
+        window.addEventListener('popstate', (event) => {
+            // Close drawer when user presses back button
+            if (document.getElementById('drawer').classList.contains('open')) {
+                closeDrawer();
+            }
+        });
+
+        // Add swipe gesture to drawer
+        const drawer = document.getElementById('drawer');
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let isDragging = false;
+
+        drawer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            isDragging = false;
+        }, { passive: true });
+
+        drawer.addEventListener('touchmove', (e) => {
+            // Check if it's a horizontal swipe (not vertical scroll)
+            const currentX = e.changedTouches[0].screenX;
+            const currentY = e.changedTouches[0].screenY;
+            const diffX = Math.abs(currentX - touchStartX);
+            const diffY = Math.abs(currentY - touchStartY);
+
+            if (diffX > diffY && diffX > 10) {
+                isDragging = true;
+            }
+        }, { passive: true });
+
+        drawer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+
+            if (isDragging) {
+                handleSwipe();
+            }
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+            const swipeThreshold = 50; // minimum swipe distance
+
+            // Swipe right to left (close drawer)
+            if (swipeDistance < -swipeThreshold) {
+                closeDrawer();
+                // Go back in history to remove the drawer state
+                if (history.state && history.state.drawerOpen) {
+                    history.back();
+                }
+            }
+        }
 
         // Register Service Worker for PWA
         if ('serviceWorker' in navigator) {
