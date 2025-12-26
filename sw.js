@@ -1,7 +1,12 @@
-const CACHE_NAME = 'casssino-v0.2.5';
+const CACHE_NAME = 'casssino-v0.3.0';
 const urlsToCache = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/apple-touch-icon.png',
+  '/icons/favicon.svg',
+  '/icons/favicon.ico'
 ];
 
 // Install service worker and cache files
