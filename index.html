@@ -1960,10 +1960,20 @@
             if (savedShowLogo !== null) state.showLogo = JSON.parse(savedShowLogo);
 
             const savedLogoStyle = localStorage.getItem('logoStyle');
-            if (savedLogoStyle !== null) state.logoStyle = savedLogoStyle;
+            const validLogoStyles = ['default', 'neon', 'bold', 'rainbow', 'elegant', 'retro', 'glitch', 'gradient', 'fire', 'cyberpunk', 'frosted', 'minimal'];
+            if (savedLogoStyle !== null && validLogoStyles.includes(savedLogoStyle)) {
+                state.logoStyle = savedLogoStyle;
+            } else {
+                state.logoStyle = 'default';
+            }
 
             const savedFontStyle = localStorage.getItem('fontStyle');
-            if (savedFontStyle !== null) state.fontStyle = savedFontStyle;
+            const validFontStyles = ['default', 'neon', 'bold', 'rainbow', 'elegant', 'retro', 'glitch', 'gradient', 'fire', 'cyberpunk', 'frosted', 'minimal-dark'];
+            if (savedFontStyle !== null && validFontStyles.includes(savedFontStyle)) {
+                state.fontStyle = savedFontStyle;
+            } else {
+                state.fontStyle = 'default';
+            }
 
             const savedShowTime = localStorage.getItem('showCurrentTime');
             if (savedShowTime !== null) state.showCurrentTime = JSON.parse(savedShowTime);
@@ -1972,7 +1982,12 @@
             if (savedAnalog !== null) state.analogClock = JSON.parse(savedAnalog);
 
             const savedClockStyle = localStorage.getItem('clockStyle');
-            if (savedClockStyle !== null) state.clockStyle = savedClockStyle;
+            const validClockStyles = ['modern', 'classic', 'neon', 'cyberpunk', 'sunset', 'frosted', 'cozy'];
+            if (savedClockStyle !== null && validClockStyles.includes(savedClockStyle)) {
+                state.clockStyle = savedClockStyle;
+            } else {
+                state.clockStyle = 'modern';
+            }
 
             const savedShowNumbers = localStorage.getItem('showNumbers');
             if (savedShowNumbers !== null) state.showNumbers = JSON.parse(savedShowNumbers);
@@ -1981,7 +1996,12 @@
             if (savedDigitalTimeStyle !== null) state.digitalTimeStyle = savedDigitalTimeStyle;
 
             const savedCountdownStyle = localStorage.getItem('countdownStyle');
-            if (savedCountdownStyle !== null) state.countdownStyle = savedCountdownStyle;
+            const validCountdownStyles = ['digital', 'cards', 'text', 'circular', 'flip', 'cyber', 'cozy'];
+            if (savedCountdownStyle !== null && validCountdownStyles.includes(savedCountdownStyle)) {
+                state.countdownStyle = savedCountdownStyle;
+            } else {
+                state.countdownStyle = 'digital';
+            }
 
             const savedLanguage = localStorage.getItem('language');
             if (savedLanguage !== null && translations[savedLanguage]) {
@@ -2071,16 +2091,13 @@
             document.getElementById('label-show-time').textContent = t.showCurrentTime;
             document.getElementById('label-analog').textContent = t.analogClock;
             document.getElementById('label-clock-style').textContent = t.clockStyle;
-            document.getElementById('style-modern').textContent = t.modern;
-            document.getElementById('style-classic').textContent = t.classic;
-            document.getElementById('style-minimal').textContent = t.minimal;
-            document.getElementById('style-elegant').textContent = t.elegant;
-            document.getElementById('style-neon').textContent = t.neon;
-            document.getElementById('style-simple').textContent = t.simple;
-            document.getElementById('style-bold').textContent = t.bold;
+            if (document.getElementById('style-modern')) document.getElementById('style-modern').textContent = t.modern;
+            if (document.getElementById('style-classic')) document.getElementById('style-classic').textContent = t.classic;
+            if (document.getElementById('style-neon')) document.getElementById('style-neon').textContent = t.neon;
             if (document.getElementById('style-cyberpunk')) document.getElementById('style-cyberpunk').textContent = t.clockCyberpunk;
             if (document.getElementById('style-sunset')) document.getElementById('style-sunset').textContent = t.clockSunset;
             if (document.getElementById('style-frosted')) document.getElementById('style-frosted').textContent = t.clockFrosted;
+            if (document.getElementById('style-cozy')) document.getElementById('style-cozy').textContent = t.clockCozy;
             document.getElementById('label-show-numbers').textContent = t.showNumbers;
             document.getElementById('label-digital-time-style').textContent = t.digitalTimeStyle;
             document.getElementById('digital-time-default').textContent = t.digitalTimeDefault;
@@ -2090,15 +2107,13 @@
             document.getElementById('digital-time-flip').textContent = t.digitalTimeFlip;
             document.getElementById('digital-time-minimal').textContent = t.digitalTimeMinimal;
             document.getElementById('label-countdown-style').textContent = t.countdownStyle;
-            document.getElementById('countdown-digital').textContent = t.digital;
-            document.getElementById('countdown-cards').textContent = t.cards;
-            document.getElementById('countdown-text').textContent = t.text;
-            document.getElementById('countdown-progress').textContent = t.progress;
-            document.getElementById('countdown-circular').textContent = t.circular;
-            document.getElementById('countdown-flip').textContent = t.flip;
-            document.getElementById('countdown-compact').textContent = t.compact;
+            if (document.getElementById('countdown-digital')) document.getElementById('countdown-digital').textContent = t.digital;
+            if (document.getElementById('countdown-cards')) document.getElementById('countdown-cards').textContent = t.cards;
+            if (document.getElementById('countdown-text')) document.getElementById('countdown-text').textContent = t.text;
+            if (document.getElementById('countdown-circular')) document.getElementById('countdown-circular').textContent = t.circular;
+            if (document.getElementById('countdown-flip')) document.getElementById('countdown-flip').textContent = t.flip;
             if (document.getElementById('countdown-cyber')) document.getElementById('countdown-cyber').textContent = t.cyber;
-            if (document.getElementById('countdown-sunset')) document.getElementById('countdown-sunset').textContent = t.sunset;
+            if (document.getElementById('countdown-cozy')) document.getElementById('countdown-cozy').textContent = t.cozy;
             document.getElementById('label-language').textContent = t.language;
             document.getElementById('counter-title').textContent = t.counterTitle;
             document.getElementById('label-show-counter').textContent = t.showCounter;
