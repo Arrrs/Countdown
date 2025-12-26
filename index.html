@@ -875,60 +875,6 @@
             white-space: pre-line;
         }
 
-        /* Progress Bar Countdown */
-        .countdown-progress {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 12px;
-        }
-
-        .progress-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            height: 24px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .light .progress-bar {
-            background-color: #f0f0f0;
-        }
-
-        .dark .progress-bar {
-            background-color: #262626;
-        }
-
-        .progress-fill {
-            height: 100%;
-            transition: width 0.3s ease;
-            border-radius: 12px;
-        }
-
-        .progress-fill.hours {
-            background: linear-gradient(90deg, #1890ff, #40a9ff);
-        }
-
-        .progress-fill.minutes {
-            background: linear-gradient(90deg, #52c41a, #73d13d);
-        }
-
-        .progress-fill.seconds {
-            background: linear-gradient(90deg, #faad14, #ffc53d);
-        }
-
         /* Circular Countdown */
         .countdown-circular {
             display: flex;
@@ -1022,29 +968,6 @@
             text-transform: uppercase;
         }
 
-        /* Compact Countdown */
-        .countdown-compact {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-top: 8px;
-        }
-
-        .compact-segment {
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .compact-segment .value {
-            color: #1890ff;
-        }
-
-        .compact-segment .label {
-            font-size: 14px;
-            opacity: 0.65;
-            margin-left: 2px;
-        }
-
         /* Cyberpunk Countdown */
         .countdown-cyber {
             display: flex;
@@ -1100,67 +1023,6 @@
             z-index: 1;
         }
 
-        /* Sunset Countdown */
-        .countdown-sunset {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
-        .sunset-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 12px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(244, 162, 97, 0.1) 100%);
-            border: 2px solid #ff6b35;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sunset-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: sunset-shimmer 3s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes sunset-shimmer {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50%, 50%); }
-        }
-
-        .sunset-value {
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #ff6b35 0%, #f7931e 50%, #fdb833 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
-        }
-
-        .sunset-label {
-            font-size: 12px;
-            color: #ff6b35;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            position: relative;
-            z-index: 1;
-        }
-
         /* Cozy Countdown */
         .countdown-cozy {
             display: flex;
@@ -1194,37 +1056,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
-        }
-
-        /* Minimalist Countdown */
-        .countdown-minimalist {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
-        .minimalist-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .minimalist-value {
-            font-size: 36px;
-            font-weight: 300;
-            color: #505050;
-            letter-spacing: 2px;
-        }
-
-        .minimalist-label {
-            font-size: 11px;
-            color: #808080;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 400;
         }
 
         /* Card sizing adjustments */
@@ -1415,36 +1246,6 @@
             <span style="position: absolute; right: 16px; cursor: pointer; font-size: 24px;" ontouchstart="closeDrawer()" onclick="closeDrawer()">×</span>
         </div>
         <div class="drawer-content">
-            <!-- Theme -->
-            <div class="setting-item">
-                <div class="setting-label">
-                    <span class="setting-icon">🎨</span>
-                    <span id="label-theme">Theme</span>
-                </div>
-                <select id="theme-select" onchange="changeTheme()">
-                    <option value="dark" id="theme-dark">Dark</option>
-                    <option value="light" id="theme-light">Light</option>
-                    <option value="custom" id="theme-custom">Custom</option>
-                </select>
-            </div>
-
-            <!-- Custom Colors (hidden by default) -->
-            <div class="setting-item" id="custom-bg-color-setting" style="display: none;">
-                <div class="setting-label">
-                    <span class="setting-icon">🎨</span>
-                    <span id="label-bg-color">Background Color</span>
-                </div>
-                <input type="color" id="custom-bg-color" onchange="changeCustomBgColor()" value="#000000">
-            </div>
-
-            <div class="setting-item" id="custom-card-bg-color-setting" style="display: none;">
-                <div class="setting-label">
-                    <span class="setting-icon">🎨</span>
-                    <span id="label-card-bg-color">Card Background</span>
-                </div>
-                <input type="color" id="custom-card-bg-color" onchange="changeCustomCardBgColor()" value="#1f1f1f">
-            </div>
-
             <!-- Shift -->
             <div class="setting-item">
                 <div class="setting-label">
@@ -1614,6 +1415,60 @@
                 </label>
             </div>
 
+            <!-- Theme -->
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-theme">Theme</span>
+                </div>
+                <select id="theme-select" onchange="changeTheme()">
+                    <option value="dark" id="theme-dark">Dark</option>
+                    <option value="light" id="theme-light">Light</option>
+                    <option value="custom" id="theme-custom">Custom</option>
+                </select>
+            </div>
+
+            <!-- Custom Colors (hidden by default) -->
+            <div class="setting-item" id="custom-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-bg-color">Background</span>
+                </div>
+                <input type="color" id="custom-bg-color" onchange="changeCustomBgColor()" value="#000000">
+            </div>
+
+            <div class="setting-item" id="custom-header-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-header-bg-color">Header</span>
+                </div>
+                <input type="color" id="custom-header-bg-color" onchange="changeCustomHeaderBgColor()" value="#141414">
+            </div>
+
+            <div class="setting-item" id="custom-clock-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-clock-bg-color">Clock</span>
+                </div>
+                <input type="color" id="custom-clock-bg-color" onchange="changeCustomClockBgColor()" value="#1f1f1f">
+            </div>
+
+            <div class="setting-item" id="custom-countdown-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-countdown-bg-color">Countdown</span>
+                </div>
+                <input type="color" id="custom-countdown-bg-color" onchange="changeCustomCountdownBgColor()" value="#1f1f1f">
+            </div>
+
+            <div class="setting-item" id="custom-counter-bg-color-setting" style="display: none;">
+                <div class="setting-label">
+                    <span class="setting-icon">🎨</span>
+                    <span id="label-counter-bg-color">Counter</span>
+                </div>
+                <input type="color" id="custom-counter-bg-color" onchange="changeCustomCounterBgColor()" value="#1f1f1f">
+            </div>
+
             <!-- Language -->
             <div class="setting-item">
                 <div class="setting-label">
@@ -1628,7 +1483,7 @@
                 </select>
             </div>
             <div class="version">
-                Version 0.2.4
+                Version 0.2.5
             </div>
         </div>
     </div>
@@ -1667,8 +1522,11 @@
                 themeDark: 'Dark',
                 themeLight: 'Light',
                 themeCustom: 'Custom',
-                bgColor: 'Background Color',
-                cardBgColor: 'Card Background',
+                bgColor: 'Background',
+                headerBgColor: 'Header',
+                clockBgColor: 'Clock',
+                countdownBgColor: 'Countdown',
+                counterBgColor: 'Counter',
                 shift: 'Shift',
                 showLogo: 'Show logo',
                 logoStyle: 'Logo style',
@@ -1746,8 +1604,11 @@
                 themeDark: 'Темна',
                 themeLight: 'Світла',
                 themeCustom: 'Власна',
-                bgColor: 'Колір фону',
-                cardBgColor: 'Фон карток',
+                bgColor: 'Фон',
+                headerBgColor: 'Заголовок',
+                clockBgColor: 'Годинник',
+                countdownBgColor: 'Відлік',
+                counterBgColor: 'Лічильник',
                 shift: 'Зміна',
                 showLogo: 'Показувати логотип',
                 logoStyle: 'Стиль логотипу',
@@ -1825,8 +1686,11 @@
                 themeDark: 'Tmavé',
                 themeLight: 'Světlé',
                 themeCustom: 'Vlastní',
-                bgColor: 'Barva pozadí',
-                cardBgColor: 'Pozadí karet',
+                bgColor: 'Pozadí',
+                headerBgColor: 'Záhlaví',
+                clockBgColor: 'Hodiny',
+                countdownBgColor: 'Odpočet',
+                counterBgColor: 'Počítadlo',
                 shift: 'Směna',
                 showLogo: 'Zobrazit logo',
                 logoStyle: 'Styl loga',
@@ -1904,8 +1768,11 @@
                 themeDark: 'Темна',
                 themeLight: 'Свєтлая',
                 themeCustom: 'Своя',
-                bgColor: 'Цвєт фона',
-                cardBgColor: 'Фон карточок',
+                bgColor: 'Фон',
+                headerBgColor: 'Загoловок',
+                clockBgColor: 'Часи',
+                countdownBgColor: 'Отщот',
+                counterBgColor: 'Щотчик',
                 shift: 'Зміна',
                 showLogo: 'Показувать логотіп',
                 logoStyle: 'Стіль логотіпа',
@@ -1992,7 +1859,10 @@
             darkMode: true,
             themeMode: 'dark', // 'dark', 'light', or 'custom'
             customBgColor: '#000000',
-            customCardBgColor: '#1f1f1f',
+            customHeaderBgColor: '#141414',
+            customClockBgColor: '#1f1f1f',
+            customCountdownBgColor: '#1f1f1f',
+            customCounterBgColor: '#1f1f1f',
             selectedShift: 0,
             showLogo: true,
             logoStyle: 'default',
@@ -2019,8 +1889,17 @@
             const savedCustomBgColor = localStorage.getItem('customBgColor');
             if (savedCustomBgColor !== null) state.customBgColor = savedCustomBgColor;
 
-            const savedCustomCardBgColor = localStorage.getItem('customCardBgColor');
-            if (savedCustomCardBgColor !== null) state.customCardBgColor = savedCustomCardBgColor;
+            const savedCustomHeaderBgColor = localStorage.getItem('customHeaderBgColor');
+            if (savedCustomHeaderBgColor !== null) state.customHeaderBgColor = savedCustomHeaderBgColor;
+
+            const savedCustomClockBgColor = localStorage.getItem('customClockBgColor');
+            if (savedCustomClockBgColor !== null) state.customClockBgColor = savedCustomClockBgColor;
+
+            const savedCustomCountdownBgColor = localStorage.getItem('customCountdownBgColor');
+            if (savedCustomCountdownBgColor !== null) state.customCountdownBgColor = savedCustomCountdownBgColor;
+
+            const savedCustomCounterBgColor = localStorage.getItem('customCounterBgColor');
+            if (savedCustomCounterBgColor !== null) state.customCounterBgColor = savedCustomCounterBgColor;
 
             const savedShift = localStorage.getItem('selectedShift');
             if (savedShift !== null) state.selectedShift = JSON.parse(savedShift);
@@ -2090,7 +1969,10 @@
         function applyState() {
             document.getElementById('theme-select').value = state.themeMode;
             document.getElementById('custom-bg-color').value = state.customBgColor;
-            document.getElementById('custom-card-bg-color').value = state.customCardBgColor;
+            document.getElementById('custom-header-bg-color').value = state.customHeaderBgColor;
+            document.getElementById('custom-clock-bg-color').value = state.customClockBgColor;
+            document.getElementById('custom-countdown-bg-color').value = state.customCountdownBgColor;
+            document.getElementById('custom-counter-bg-color').value = state.customCounterBgColor;
             document.getElementById('shift-select').value = state.selectedShift;
             document.getElementById('show-logo-toggle').checked = state.showLogo;
             document.getElementById('logo-style-select').value = state.logoStyle;
@@ -2115,7 +1997,10 @@
         // Update visibility
         function updateVisibility() {
             document.getElementById('custom-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
-            document.getElementById('custom-card-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
+            document.getElementById('custom-header-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
+            document.getElementById('custom-clock-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
+            document.getElementById('custom-countdown-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
+            document.getElementById('custom-counter-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
             document.getElementById('logo-style-setting').style.display = state.showLogo ? 'block' : 'none';
             document.getElementById('analog-setting').style.display = state.showCurrentTime ? 'block' : 'none';
             document.getElementById('clock-style-setting').style.display =
@@ -2137,7 +2022,10 @@
             if (document.getElementById('theme-light')) document.getElementById('theme-light').textContent = t.themeLight;
             if (document.getElementById('theme-custom')) document.getElementById('theme-custom').textContent = t.themeCustom;
             if (document.getElementById('label-bg-color')) document.getElementById('label-bg-color').textContent = t.bgColor;
-            if (document.getElementById('label-card-bg-color')) document.getElementById('label-card-bg-color').textContent = t.cardBgColor;
+            if (document.getElementById('label-header-bg-color')) document.getElementById('label-header-bg-color').textContent = t.headerBgColor;
+            if (document.getElementById('label-clock-bg-color')) document.getElementById('label-clock-bg-color').textContent = t.clockBgColor;
+            if (document.getElementById('label-countdown-bg-color')) document.getElementById('label-countdown-bg-color').textContent = t.countdownBgColor;
+            if (document.getElementById('label-counter-bg-color')) document.getElementById('label-counter-bg-color').textContent = t.counterBgColor;
             document.getElementById('label-shift').textContent = t.shift;
             document.getElementById('label-show-logo').textContent = t.showLogo;
             document.getElementById('label-logo-style').textContent = t.logoStyle;
@@ -2237,9 +2125,27 @@
             applyTheme();
         }
 
-        function changeCustomCardBgColor() {
-            state.customCardBgColor = document.getElementById('custom-card-bg-color').value;
-            localStorage.setItem('customCardBgColor', state.customCardBgColor);
+        function changeCustomHeaderBgColor() {
+            state.customHeaderBgColor = document.getElementById('custom-header-bg-color').value;
+            localStorage.setItem('customHeaderBgColor', state.customHeaderBgColor);
+            applyTheme();
+        }
+
+        function changeCustomClockBgColor() {
+            state.customClockBgColor = document.getElementById('custom-clock-bg-color').value;
+            localStorage.setItem('customClockBgColor', state.customClockBgColor);
+            applyTheme();
+        }
+
+        function changeCustomCountdownBgColor() {
+            state.customCountdownBgColor = document.getElementById('custom-countdown-bg-color').value;
+            localStorage.setItem('customCountdownBgColor', state.customCountdownBgColor);
+            applyTheme();
+        }
+
+        function changeCustomCounterBgColor() {
+            state.customCounterBgColor = document.getElementById('custom-counter-bg-color').value;
+            localStorage.setItem('customCounterBgColor', state.customCounterBgColor);
             applyTheme();
         }
 
@@ -2248,16 +2154,36 @@
                 document.body.className = 'dark'; // Use dark class for text colors
                 document.body.style.backgroundColor = state.customBgColor;
 
-                // Apply custom card backgrounds
-                const cards = document.querySelectorAll('.card');
-                cards.forEach(card => {
-                    card.style.backgroundColor = state.customCardBgColor;
+                // Apply custom header background
+                const header = document.querySelector('.header');
+                if (header) header.style.backgroundColor = state.customHeaderBgColor;
+
+                // Apply custom clock background
+                const clockCards = document.querySelectorAll('.clock-container');
+                clockCards.forEach(card => {
+                    card.style.backgroundColor = state.customClockBgColor;
+                });
+
+                // Apply custom countdown background
+                const countdownCards = document.querySelectorAll('.countdown-container');
+                countdownCards.forEach(card => {
+                    card.style.backgroundColor = state.customCountdownBgColor;
+                });
+
+                // Apply custom counter background
+                const counterCards = document.querySelectorAll('.counter-container');
+                counterCards.forEach(card => {
+                    card.style.backgroundColor = state.customCounterBgColor;
                 });
             } else {
                 document.body.className = state.themeMode;
                 document.body.style.backgroundColor = '';
 
-                // Reset card backgrounds
+                // Reset header background
+                const header = document.querySelector('.header');
+                if (header) header.style.backgroundColor = '';
+
+                // Reset all card backgrounds
                 const cards = document.querySelectorAll('.card');
                 cards.forEach(card => {
                     card.style.backgroundColor = '';
@@ -2511,7 +2437,11 @@
             const style = state.clockStyle;
 
             // Style-specific settings
-            const circleColor = state.darkMode ? '#1f1f1f' : '#ffffff';
+            let circleColor = state.darkMode ? '#1f1f1f' : '#ffffff';
+            // Use custom color for analog clock dial when in custom theme mode
+            if (state.themeMode === 'custom') {
+                circleColor = state.customClockBgColor;
+            }
             const strokeColor = state.darkMode ? '#434343' : '#d9d9d9';
             const textColor = state.darkMode ? '#ffffff' : '#000000';
             const markColor = state.darkMode ? '#666666' : '#cccccc';
@@ -2900,9 +2830,24 @@
             // Update countdown
             const countdownDisplay = document.getElementById('countdown-display');
             countdownDisplay.innerHTML = renderCountdown(now);
-            
+
             // Reapply font styles to newly rendered elements
             updateFont();
+
+            // Reapply custom theme colors to newly rendered elements
+            if (state.themeMode === 'custom') {
+                // Apply custom clock background
+                const clockCards = document.querySelectorAll('.clock-container');
+                clockCards.forEach(card => {
+                    card.style.backgroundColor = state.customClockBgColor;
+                });
+
+                // Apply custom countdown background
+                const countdownCards = document.querySelectorAll('.countdown-container');
+                countdownCards.forEach(card => {
+                    card.style.backgroundColor = state.customCountdownBgColor;
+                });
+            }
         }
 
         // Initialize
@@ -2970,13 +2915,7 @@
         // Register Service Worker for PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
-                        console.log('Service Worker registered:', registration);
-                    })
-                    .catch((error) => {
-                        console.log('Service Worker registration failed:', error);
-                    });
+                navigator.serviceWorker.register('/sw.js');
             });
         }
     </script>
