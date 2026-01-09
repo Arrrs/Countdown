@@ -1,6 +1,6 @@
 {
-  "name": "Casssino - Shift Timer",
-  "short_name": "Casssino",
+  "name": "Shift Tracker",
+  "short_name": "Tracker",
   "description": "Shift countdown timer with clock and counter",
   "start_url": "/",
   "display": "standalone",

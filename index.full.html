@@ -603,6 +603,30 @@
             color: #ffffff;
         }
 
+        /* Text Input */
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid;
+            font-size: 14px;
+            background-color: transparent;
+        }
+
+        .light input[type="text"] {
+            border-color: #d9d9d9;
+            color: #000000;
+        }
+
+        .dark input[type="text"] {
+            border-color: #434343;
+            color: #ffffff;
+        }
+
+        input[type="text"]::placeholder {
+            opacity: 0.5;
+        }
+
         /* Color Input */
         input[type="color"] {
             width: 100%;
@@ -875,6 +899,12 @@
             font-size: 20px;
             padding: 16px;
             white-space: pre-line;
+        }
+
+        .status-message.font-style-glitch {
+            position: relative;
+            display: inline-block;
+            width: 100%;
         }
 
         /* Circular Countdown */
@@ -1275,6 +1305,15 @@
                 </label>
             </div>
 
+            <!-- Logo Text -->
+            <div class="setting-item" id="logo-text-setting">
+                <div class="setting-label">
+                    <span class="setting-icon">✏️</span>
+                    <span id="label-logo-text">Logo text</span>
+                </div>
+                <input type="text" id="logo-text-input" onchange="changeLogoText()" maxlength="16" placeholder="Tracker" value="Tracker">
+            </div>
+
             <!-- Logo Style -->
             <div class="setting-item" id="logo-style-setting">
                 <div class="setting-label">
@@ -1389,8 +1428,20 @@
                 </select>
             </div>
 
-            <!-- Countdown Style -->
+            <!-- Show Countdown -->
             <div class="setting-item">
+                <div class="setting-label">
+                    <span class="setting-icon">⏱</span>
+                    <span id="label-show-countdown">Show countdown</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="show-countdown-toggle" onchange="toggleShowCountdown()" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Countdown Style -->
+            <div class="setting-item" id="countdown-style-setting">
                 <div class="setting-label">
                     <span id="label-countdown-style">Countdown style</span>
                 </div>
@@ -1531,6 +1582,7 @@
                 counterBgColor: 'Counter',
                 shift: 'Shift',
                 showLogo: 'Show logo',
+                logoText: 'Logo text',
                 logoStyle: 'Logo style',
                 logoDefault: 'Default',
                 logoNeon: 'Neon',
@@ -1594,10 +1646,11 @@
                 hoursShort: 'h',
                 minutesShort: 'min',
                 secondsShort: 'sec',
-                shiftNotStarted: 'Shift "{name}" has not started yet',
-                shiftEnded: 'Shift "{name}" has ended',
+                shiftNotStarted: 'Shift {name} has not started yet',
+                shiftEnded: 'Shift {name} has ended',
                 counterTitle: 'Counter',
                 showCounter: 'Show counter',
+                showCountdown: 'Show countdown',
             },
             uk: {
                 app: 'Casssino',
@@ -1613,6 +1666,7 @@
                 counterBgColor: 'Лічильник',
                 shift: 'Зміна',
                 showLogo: 'Показувати логотип',
+                logoText: 'Текст логотипу',
                 logoStyle: 'Стиль логотипу',
                 logoDefault: 'Стандартний',
                 logoNeon: 'Неон',
@@ -1676,10 +1730,11 @@
                 hoursShort: 'год',
                 minutesShort: 'хв',
                 secondsShort: 'сек',
-                shiftNotStarted: 'Зміна "{name}" ще не почалась',
-                shiftEnded: 'Зміна "{name}" закінчилась',
+                shiftNotStarted: 'Зміна {name} ще не почалась',
+                shiftEnded: 'Зміна {name} закінчилась',
                 counterTitle: 'Лічильник',
                 showCounter: 'Показувати лічильник',
+                showCountdown: 'Показувати зворотний відлік',
             },
             cs: {
                 app: 'Casssino',
@@ -1695,6 +1750,7 @@
                 counterBgColor: 'Počítadlo',
                 shift: 'Směna',
                 showLogo: 'Zobrazit logo',
+                logoText: 'Text loga',
                 logoStyle: 'Styl loga',
                 logoDefault: 'Výchozí',
                 logoNeon: 'Neon',
@@ -1758,10 +1814,11 @@
                 hoursShort: 'hod',
                 minutesShort: 'min',
                 secondsShort: 'sek',
-                shiftNotStarted: 'Směna "{name}" ještě nezačala',
-                shiftEnded: 'Směna "{name}" skončila',
+                shiftNotStarted: 'Směna {name} ještě nezačala',
+                shiftEnded: 'Směna {name} skončila',
                 counterTitle: 'Počítadlo',
                 showCounter: 'Zobrazit počítadlo',
+                showCountdown: 'Zobrazit odpočet',
             },
             bc: {
                 app: 'Казззіно',
@@ -1777,6 +1834,7 @@
                 counterBgColor: 'Щотчик',
                 shift: 'Зміна',
                 showLogo: 'Показувать логотіп',
+                logoText: 'Тєкст логотіпа',
                 logoStyle: 'Стіль логотіпа',
                 logoDefault: 'Стандартний',
                 logoNeon: 'Нєон',
@@ -1840,10 +1898,11 @@
                 hoursShort: 'год',
                 minutesShort: 'хв',
                 secondsShort: 'сєк',
-                shiftNotStarted: 'Зміна "{name}" ше не началась',
-                shiftEnded: 'Зміна "{name}" закончилась',
+                shiftNotStarted: 'Зміна {name} ше не началась',
+                shiftEnded: 'Зміна {name} закончилась',
                 counterTitle: 'Щотчик',
                 showCounter: 'Показувать щотчик',
+                showCountdown: 'Показувать обратний отщот',
             }
         };
 
@@ -1867,6 +1926,7 @@
             customCounterBgColor: '#1f1f1f',
             selectedShift: 0,
             showLogo: true,
+            logoText: 'Tracker',
             logoStyle: 'default',
             fontStyle: 'default',
             showCurrentTime: true,
@@ -1877,7 +1937,8 @@
             countdownStyle: 'digital',
             language: 'en',
             counterValue: 8,
-            showCounter: true
+            showCounter: true,
+            showCountdown: true
         };
 
         // Load state from localStorage
@@ -1908,6 +1969,9 @@
 
             const savedShowLogo = localStorage.getItem('showLogo');
             if (savedShowLogo !== null) state.showLogo = JSON.parse(savedShowLogo);
+
+            const savedLogoText = localStorage.getItem('logoText');
+            if (savedLogoText !== null) state.logoText = savedLogoText;
 
             const savedLogoStyle = localStorage.getItem('logoStyle');
             const validLogoStyles = ['default', 'neon', 'bold', 'rainbow', 'elegant', 'retro', 'glitch', 'gradient', 'fire', 'cyberpunk', 'frosted', 'minimal'];
@@ -1964,6 +2028,9 @@
             const savedShowCounter = localStorage.getItem('showCounter');
             if (savedShowCounter !== null) state.showCounter = JSON.parse(savedShowCounter);
 
+            const savedShowCountdown = localStorage.getItem('showCountdown');
+            if (savedShowCountdown !== null) state.showCountdown = JSON.parse(savedShowCountdown);
+
             const savedShifts = localStorage.getItem('shifts');
             if (savedShifts !== null) shifts = JSON.parse(savedShifts);
 
@@ -1980,6 +2047,7 @@
             document.getElementById('custom-counter-bg-color').value = state.customCounterBgColor;
             document.getElementById('shift-select').value = state.selectedShift;
             document.getElementById('show-logo-toggle').checked = state.showLogo;
+            document.getElementById('logo-text-input').value = state.logoText;
             document.getElementById('logo-style-select').value = state.logoStyle;
             document.getElementById('font-style-select').value = state.fontStyle;
             document.getElementById('show-time-toggle').checked = state.showCurrentTime;
@@ -1987,6 +2055,7 @@
             document.getElementById('clock-style-select').value = state.clockStyle;
             document.getElementById('show-numbers-toggle').checked = state.showNumbers;
             document.getElementById('digital-time-style-select').value = state.digitalTimeStyle;
+            document.getElementById('show-countdown-toggle').checked = state.showCountdown;
             document.getElementById('countdown-style-select').value = state.countdownStyle;
             document.getElementById('language-select').value = state.language;
             document.getElementById('show-counter-toggle').checked = state.showCounter;
@@ -2006,6 +2075,7 @@
             document.getElementById('custom-clock-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
             document.getElementById('custom-countdown-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
             document.getElementById('custom-counter-bg-color-setting').style.display = state.themeMode === 'custom' ? 'block' : 'none';
+            document.getElementById('logo-text-setting').style.display = state.showLogo ? 'block' : 'none';
             document.getElementById('logo-style-setting').style.display = state.showLogo ? 'block' : 'none';
             document.getElementById('analog-setting').style.display = state.showCurrentTime ? 'block' : 'none';
             document.getElementById('clock-style-setting').style.display =
@@ -2014,6 +2084,8 @@
                 (state.showCurrentTime && state.analogClock) ? 'block' : 'none';
             document.getElementById('digital-time-style-setting').style.display =
                 (state.showCurrentTime && !state.analogClock) ? 'block' : 'none';
+            document.getElementById('countdown-style-setting').style.display = state.showCountdown ? 'block' : 'none';
+            document.getElementById('countdown-display').style.display = state.showCountdown ? 'block' : 'none';
             document.getElementById('counter-section').style.display = state.showCounter ? 'block' : 'none';
         }
 
@@ -2033,6 +2105,7 @@
             if (document.getElementById('label-counter-bg-color')) document.getElementById('label-counter-bg-color').textContent = t.counterBgColor;
             document.getElementById('label-shift').textContent = t.shift;
             document.getElementById('label-show-logo').textContent = t.showLogo;
+            document.getElementById('label-logo-text').textContent = t.logoText;
             document.getElementById('label-logo-style').textContent = t.logoStyle;
             document.getElementById('logo-default').textContent = t.logoDefault;
             document.getElementById('logo-neon').textContent = t.logoNeon;
@@ -2077,6 +2150,7 @@
             document.getElementById('digital-time-segment').textContent = t.digitalTimeSegment;
             document.getElementById('digital-time-flip').textContent = t.digitalTimeFlip;
             document.getElementById('digital-time-minimal').textContent = t.digitalTimeMinimal;
+            document.getElementById('label-show-countdown').textContent = t.showCountdown;
             document.getElementById('label-countdown-style').textContent = t.countdownStyle;
             if (document.getElementById('countdown-digital')) document.getElementById('countdown-digital').textContent = t.digital;
             if (document.getElementById('countdown-cards')) document.getElementById('countdown-cards').textContent = t.cards;
@@ -2213,6 +2287,27 @@
             updateLogo();
         }
 
+        function changeLogoText() {
+            const input = document.getElementById('logo-text-input');
+            let text = input.value.trim();
+
+            // Limit to 16 characters
+            if (text.length > 16) {
+                text = text.substring(0, 16);
+                input.value = text;
+            }
+
+            // Set to default if empty
+            if (text === '') {
+                text = 'Tracker';
+                input.value = text;
+            }
+
+            state.logoText = text;
+            localStorage.setItem('logoText', state.logoText);
+            updateLogo();
+        }
+
         function changeLogoStyle() {
             state.logoStyle = document.getElementById('logo-style-select').value;
             localStorage.setItem('logoStyle', state.logoStyle);
@@ -2233,21 +2328,31 @@
             }
             logo.style.display = 'block';
 
-            // Remove all logo style classes
-            logo.className = '';
+            // Update logo text
+            logo.textContent = state.logoText;
 
-            // Add new style class
-            if (state.logoStyle !== 'default') {
-                logo.classList.add(`logo-style-${state.logoStyle}`);
-            } else {
-                logo.classList.add('logo-style-default');
+            // Get the target class name
+            const targetClass = state.logoStyle !== 'default'
+                ? `logo-style-${state.logoStyle}`
+                : 'logo-style-default';
+
+            // Only update classes if they're different (to avoid restarting animations)
+            if (!logo.classList.contains(targetClass)) {
+                // Remove all logo style classes
+                logo.className = '';
+                // Add new style class
+                logo.classList.add(targetClass);
             }
 
             // For glitch effect, we need the data-text attribute
             if (state.logoStyle === 'glitch') {
-                logo.setAttribute('data-text', logo.textContent);
+                if (logo.getAttribute('data-text') !== state.logoText) {
+                    logo.setAttribute('data-text', state.logoText);
+                }
             } else {
-                logo.removeAttribute('data-text');
+                if (logo.hasAttribute('data-text')) {
+                    logo.removeAttribute('data-text');
+                }
             }
         }
 
@@ -2332,6 +2437,12 @@
         function toggleShowCounter() {
             state.showCounter = !state.showCounter;
             localStorage.setItem('showCounter', JSON.stringify(state.showCounter));
+            updateVisibility();
+        }
+
+        function toggleShowCountdown() {
+            state.showCountdown = !state.showCountdown;
+            localStorage.setItem('showCountdown', JSON.stringify(state.showCountdown));
             updateVisibility();
         }
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'casssino-v0.3.0';
+const CACHE_NAME = 'tracker-v0.3.0';
 const urlsToCache = [
   '/',
   '/index.html',
