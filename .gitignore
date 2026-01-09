@@ -1,4 +1,25 @@
-*.md
+# Documentation folder
 /docs/*
-/.vscode
-/.claude/
+
+# Editor directories
+/.vscode/
+/.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+*.swp
+*.swo
+*~
+
+# Node modules (if you ever add npm)
+node_modules/
+
+# Build output (if you create a build process)
+dist/
+build/

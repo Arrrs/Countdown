@@ -37,7 +37,7 @@ A Progressive Web App (PWA) for tracking work shifts with real-time countdown ti
 - **Hide/Show Components**: Toggle visibility of logo, clock, countdown, and counter
 
 ### 🌍 Multi-Language Support
-- **3 Languages**: English (en), Ukrainian (uk), and Belarusian (bc)
+- **3 Languages**: English (en), Czech (cs), and Ukrainian (uk)
 - **Fully Translated UI**: All interface elements, messages, and errors are localized
 - **Dynamic Language Switching**: Change language without page reload
 

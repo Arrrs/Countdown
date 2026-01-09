@@ -416,16 +416,9 @@
             left: 0;
         }
 
-        /* Shifts drawer (slides from right) */
+        /* Shifts drawer (slides from left, on top of settings) */
         #shifts-drawer {
-            left: auto;
-            right: 0;
-            transform: translateX(100%);
-            transition: transform 0.3s;
-        }
-
-        #shifts-drawer.open {
-            transform: translateX(0);
+            z-index: 1002; /* Higher than main drawer (1001) */
         }
 
         .drawer-header {
@@ -1305,7 +1298,7 @@
     <!-- Header -->
     <div class="header">
         <div class="menu-icon" onclick="toggleDrawer()">☰</div>
-        <h1 id="app-title">Casssino</h1>
+        <h1 id="app-title">Tracker</h1>
     </div>
 
     <!-- Drawer Overlay -->
@@ -1575,7 +1568,6 @@
                     <option value="en">English</option>
                     <option value="cs">Čeština</option>
                     <option value="uk">Українська</option>
-                    <option value="bc">Білоцерківська</option>
                 </select>
             </div>
             <div class="version">
@@ -1657,7 +1649,7 @@
         // Translations
         const translations = {
             en: {
-                app: 'Casssino',
+                app: 'Tracker',
                 settings: 'Settings',
                 theme: 'Theme',
                 themeDark: 'Dark',
@@ -1759,7 +1751,7 @@
                 noShiftsMessage: 'No shifts configured. Please add a shift in settings.',
             },
             uk: {
-                app: 'Casssino',
+                app: 'Tracker',
                 settings: 'Налаштування',
                 theme: 'Тема',
                 themeDark: 'Темна',
@@ -1841,9 +1833,27 @@
                 counterTitle: 'Лічильник',
                 showCounter: 'Показувати лічильник',
                 showCountdown: 'Показувати зворотний відлік',
+                manageShifts: 'Керування змінами',
+                addNewShift: 'Додати нову зміну',
+                editShift: 'Редагувати зміну',
+                shiftName: 'Назва зміни',
+                startTime: 'Час початку',
+                endTime: 'Час закінчення',
+                save: 'Зберегти',
+                cancel: 'Скасувати',
+                edit: 'Редагувати',
+                delete: 'Видалити',
+                noShiftsConfigured: 'Зміни не налаштовані',
+                addFirstShift: 'Додайте вашу першу зміну нижче',
+                shiftNameRequired: 'Назва зміни обов\'язкова',
+                shiftNameMaxLength: 'Назва зміни має бути не більше 10 символів',
+                startTimeRequired: 'Час початку обов\'язковий',
+                endTimeRequired: 'Час закінчення обов\'язковий',
+                deleteShiftConfirm: 'Ви впевнені, що хочете видалити зміну "{name}"?',
+                noShiftsMessage: 'Зміни не налаштовані. Будь ласка, додайте зміну в налаштуваннях.',
             },
             cs: {
-                app: 'Casssino',
+                app: 'Tracker',
                 settings: 'Nastavení',
                 theme: 'Téma',
                 themeDark: 'Tmavé',
@@ -1925,108 +1935,24 @@
                 counterTitle: 'Počítadlo',
                 showCounter: 'Zobrazit počítadlo',
                 showCountdown: 'Zobrazit odpočet',
-            },
-            bc: {
-                app: 'Казззіно',
-                settings: 'Настройки',
-                theme: 'Тєма',
-                themeDark: 'Темна',
-                themeLight: 'Свєтлая',
-                themeCustom: 'Своя',
-                bgColor: 'Фон',
-                headerBgColor: 'Загoловок',
-                clockBgColor: 'Часи',
-                countdownBgColor: 'Отщот',
-                counterBgColor: 'Щотчик',
-                shift: 'Зміна',
-                showLogo: 'Показувать логотіп',
-                logoText: 'Тєкст логотіпа',
-                logoStyle: 'Стіль логотіпа',
-                logoDefault: 'Стандартний',
-                logoNeon: 'Нєон',
-                logoBold: 'Жирний',
-                logoRainbow: 'Радуга',
-                logoElegant: 'Елєгантний',
-                logoRetro: 'Ретро',
-                logoGlitch: 'Глітч',
-                logoGradient: 'Градієнт',
-                logoFire: 'Агонь',
-                logoCyberpunk: 'Кіберпанк',
-                logoFrosted: 'Морозний',
-                logoMinimal: 'Мінімальний',
-                fontStyle: 'Стіль шрифту',
-                fontDefault: 'Стандартний',
-                fontNeon: 'Нєон',
-                fontBold: 'Жирний',
-                fontRainbow: 'Радуга',
-                fontElegant: 'Елєгантний',
-                fontRetro: 'Ретро',
-                fontGlitch: 'Глітч',
-                fontGradient: 'Градієнт',
-                fontFire: 'Агонь',
-                fontCyberpunk: 'Кіберпанк',
-                fontFrosted: 'Морозний',
-                fontMinimalDark: 'Мін. Темний',
-                showCurrentTime: 'Показувать тєкущє врємя',
-                analogClock: 'Аналогові часи',
-                clockStyle: 'Стіль часів',
-                modern: 'Соврємєнний',
-                classic: 'Класічєский',
-                neon: 'Нєон',
-                clockCyberpunk: 'Кіберпанк',
-                clockSunset: 'Захід сонця',
-                clockFrosted: 'Морозний',
-                clockCozy: 'Уютний',
-                showNumbers: 'Показувать цифри',
-                digitalTimeStyle: 'Стіль цифрових часів',
-                digitalTimeDefault: 'Стандартний',
-                digitalTimeLcd: 'LCD',
-                digitalTimeNeon: 'Нєон',
-                digitalTimeSegment: 'Сєгмєнтний',
-                digitalTimeFlip: 'Перекидний',
-                digitalTimeMinimal: 'Мінімальний',
-                digitalTimeCozy: 'Уютний',
-                digitalTimeMinimalClock: 'Мін. Часи',
-                countdownStyle: 'Стіль обратного отщота',
-                digital: 'Цифровий',
-                cards: 'Карточний',
-                text: 'Тєкстовий',
-                circular: 'Круглий',
-                flip: 'Перекидающийся',
-                cyber: 'Кіберпанк',
-                cozy: 'Уютний',
-                language: 'Лангуаге',
-                currentTime: 'Тєкуущє врємя',
-                shiftEnd: 'До кінця зміни',
-                hours: 'Часов',
-                minutes: 'Минут',
-                seconds: 'Сєкунд',
-                hoursShort: 'год',
-                minutesShort: 'хв',
-                secondsShort: 'сєк',
-                shiftNotStarted: 'Зміна {name} ше не началась',
-                shiftEnded: 'Зміна {name} закончилась',
-                counterTitle: 'Щотчик',
-                showCounter: 'Показувать щотчик',
-                showCountdown: 'Показувать обратний отщот',
-                manageShifts: 'Керування змінами',
-                addNewShift: 'Додати нову зміну',
-                editShift: 'Редагувати зміну',
-                shiftName: 'Назва зміни',
-                startTime: 'Час початку',
-                endTime: 'Час закінчення',
-                save: 'Зберегти',
-                cancel: 'Скасувати',
-                edit: 'Редагувати',
-                delete: 'Видалити',
-                noShiftsConfigured: 'Зміни не налаштовані',
-                addFirstShift: 'Додайте першу зміну нижче',
-                shiftNameRequired: 'Назва зміни обов\'язкова',
-                shiftNameMaxLength: 'Назва зміни не повинна перевищувати 10 символів',
-                startTimeRequired: 'Час початку обов\'язковий',
-                endTimeRequired: 'Час закінчення обов\'язковий',
-                deleteShiftConfirm: 'Ви впевнені, що хочете видалити зміну "{name}"?',
-                noShiftsMessage: 'Зміни не налаштовані. Будь ласка, додайте зміну в налаштуваннях.',
+                manageShifts: 'Správa směn',
+                addNewShift: 'Přidat novou směnu',
+                editShift: 'Upravit směnu',
+                shiftName: 'Název směny',
+                startTime: 'Čas začátku',
+                endTime: 'Čas konce',
+                save: 'Uložit',
+                cancel: 'Zrušit',
+                edit: 'Upravit',
+                delete: 'Smazat',
+                noShiftsConfigured: 'Žádné směny nejsou nakonfigurovány',
+                addFirstShift: 'Přidejte svou první směnu níže',
+                shiftNameRequired: 'Název směny je povinný',
+                shiftNameMaxLength: 'Název směny musí mít maximálně 10 znaků',
+                startTimeRequired: 'Čas začátku je povinný',
+                endTimeRequired: 'Čas konce je povinný',
+                deleteShiftConfirm: 'Opravdu chcete smazat směnu "{name}"?',
+                noShiftsMessage: 'Žádné směny nejsou nakonfigurovány. Přidejte prosím směnu v nastavení.',
             }
         };
 
@@ -2340,13 +2266,13 @@
         }
 
         function closeAnyDrawer() {
-            // Close main settings drawer
-            if (document.getElementById('drawer').classList.contains('open')) {
-                closeDrawer();
-            }
-            // Close shifts drawer
+            // Close shifts drawer first if it's open (it's on top)
             if (document.getElementById('shifts-drawer').classList.contains('open')) {
                 closeShiftsDrawer();
+            }
+            // Otherwise close main settings drawer
+            else if (document.getElementById('drawer').classList.contains('open')) {
+                closeDrawer();
             }
         }
 
@@ -2357,6 +2283,8 @@
             document.getElementById('shifts-drawer').classList.add('open');
             document.getElementById('drawer-overlay').classList.add('open');
             populateShiftsList();
+            // Push a new history state when opening shifts drawer
+            history.pushState({ shiftsDrawerOpen: true }, '');
         }
 
         function closeShiftsDrawer() {
@@ -3340,10 +3268,14 @@
         updateDisplay();
         setInterval(updateDisplay, 1000);
 
-        // Handle browser back button for drawer
+        // Handle browser back button for drawers
         window.addEventListener('popstate', (event) => {
-            // Close drawer when user presses back button
-            if (document.getElementById('drawer').classList.contains('open')) {
+            // Close shifts drawer first if it's open (it's on top)
+            if (document.getElementById('shifts-drawer').classList.contains('open')) {
+                closeShiftsDrawer();
+            }
+            // Otherwise close main settings drawer
+            else if (document.getElementById('drawer').classList.contains('open')) {
                 closeDrawer();
             }
         });
@@ -3355,14 +3287,24 @@
         let touchStartY = 0;
         let touchEndY = 0;
         let isDragging = false;
+        let shiftsDrawerHandlingSwipe = false; // Flag to prevent double-close
 
         drawer.addEventListener('touchstart', (e) => {
+            // Don't handle touches if shifts drawer is open on top
+            if (document.getElementById('shifts-drawer').classList.contains('open')) {
+                return;
+            }
             touchStartX = e.changedTouches[0].screenX;
             touchStartY = e.changedTouches[0].screenY;
             isDragging = false;
+            shiftsDrawerHandlingSwipe = false; // Reset flag
         }, { passive: true });
 
         drawer.addEventListener('touchmove', (e) => {
+            // Don't handle touches if shifts drawer is open on top
+            if (document.getElementById('shifts-drawer').classList.contains('open')) {
+                return;
+            }
             // Check if it's a horizontal swipe (not vertical scroll)
             const currentX = e.changedTouches[0].screenX;
             const currentY = e.changedTouches[0].screenY;
@@ -3375,6 +3317,10 @@
         }, { passive: true });
 
         drawer.addEventListener('touchend', (e) => {
+            // Don't handle touches if shifts drawer is open on top
+            if (document.getElementById('shifts-drawer').classList.contains('open')) {
+                return;
+            }
             touchEndX = e.changedTouches[0].screenX;
             touchEndY = e.changedTouches[0].screenY;
 
@@ -3389,10 +3335,67 @@
 
             // Swipe right to left (close drawer)
             if (swipeDistance < -swipeThreshold) {
-                closeDrawer();
-                // Go back in history to remove the drawer state
-                if (history.state && history.state.drawerOpen) {
-                    history.back();
+                // Don't close main drawer if shifts drawer is open on top OR if shifts drawer already handled this swipe
+                if (!document.getElementById('shifts-drawer').classList.contains('open') && !shiftsDrawerHandlingSwipe) {
+                    closeDrawer();
+                    // Go back in history to remove the drawer state
+                    if (history.state && history.state.drawerOpen) {
+                        history.back();
+                    }
+                }
+            }
+        }
+
+        // Add swipe gesture to shifts drawer
+        const shiftsDrawer = document.getElementById('shifts-drawer');
+        let shiftsDrawerTouchStartX = 0;
+        let shiftsDrawerTouchEndX = 0;
+        let shiftsDrawerTouchStartY = 0;
+        let shiftsDrawerTouchEndY = 0;
+        let shiftsDrawerIsDragging = false;
+
+        shiftsDrawer.addEventListener('touchstart', (e) => {
+            shiftsDrawerTouchStartX = e.changedTouches[0].screenX;
+            shiftsDrawerTouchStartY = e.changedTouches[0].screenY;
+            shiftsDrawerIsDragging = false;
+            shiftsDrawerHandlingSwipe = false; // Reset flag
+        }, { passive: true });
+
+        shiftsDrawer.addEventListener('touchmove', (e) => {
+            // Check if it's a horizontal swipe (not vertical scroll)
+            const currentX = e.changedTouches[0].screenX;
+            const currentY = e.changedTouches[0].screenY;
+            const diffX = Math.abs(currentX - shiftsDrawerTouchStartX);
+            const diffY = Math.abs(currentY - shiftsDrawerTouchStartY);
+
+            if (diffX > diffY && diffX > 10) {
+                shiftsDrawerIsDragging = true;
+            }
+        }, { passive: true });
+
+        shiftsDrawer.addEventListener('touchend', (e) => {
+            shiftsDrawerTouchEndX = e.changedTouches[0].screenX;
+            shiftsDrawerTouchEndY = e.changedTouches[0].screenY;
+
+            if (shiftsDrawerIsDragging) {
+                handleShiftsDrawerSwipe();
+            }
+        }, { passive: true });
+
+        function handleShiftsDrawerSwipe() {
+            const swipeDistance = shiftsDrawerTouchEndX - shiftsDrawerTouchStartX;
+            const swipeThreshold = 50; // minimum swipe distance
+
+            // Swipe right to left (close shifts drawer - push it back to the left)
+            if (swipeDistance < -swipeThreshold) {
+                // Only close if shifts drawer is actually open
+                if (document.getElementById('shifts-drawer').classList.contains('open')) {
+                    shiftsDrawerHandlingSwipe = true; // Set flag to prevent main drawer from also closing
+                    closeShiftsDrawer();
+                    // Go back in history to remove the drawer state
+                    if (history.state && history.state.shiftsDrawerOpen) {
+                        history.back();
+                    }
                 }
             }
         }
