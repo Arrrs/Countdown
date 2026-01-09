@@ -120,7 +120,7 @@
 
         @keyframes rainbow-shift {
             0% { background-position: 0% center; }
-            100% { background-position: 100% center; }
+            100% { background-position: 200% center; }
         }
 
         .logo-style-elegant {
@@ -259,11 +259,6 @@
             animation: neon-flicker 2s infinite alternate;
         }
 
-        /* @keyframes neon-flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        } */
-
         .font-style-bold {
             font-weight: 900;
             font-size: 24px;
@@ -280,32 +275,6 @@
             background-clip: text;
             animation: rainbow-shift 3s linear infinite;
         }
-
-        /* Apply font styles to all children recursively */
-        /* .font-style-default * { font-weight: 600; }
-        .font-style-neon * { 
-            font-weight: 700;
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #ff00ff;
-            animation: neon-flicker 2s infinite alternate;
-        }
-        .font-style-bold * { 
-            font-weight: 900;
-            font-size: 24px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .font-style-rainbow * {
-            font-weight: 700;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
-            background-size: 200% auto;
-            background-position: 0% center;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: rainbow-shift 3s linear infinite;
-        } */
-
       
 
         .font-style-elegant {
@@ -328,13 +297,14 @@
             font-weight: 700;
             position: relative;
             animation: glitch-skew 1s infinite;
+            z-index: 0;
         }
 
         .font-style-glitch::before,
         .font-style-glitch::after {
             content: attr(data-text);
             position: absolute;
-            top: 0;
+            top: 0; /* no shift fix */
             left: 0;
             width: 100%;
             height: 100%;
@@ -352,30 +322,6 @@
             z-index: -2;
         }
 
-        /* @keyframes glitch-anim-1 {
-            0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
-            20% { clip-path: inset(92% 0 1% 0); transform: translate(2px, 0); }
-            40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, 0); }
-            60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, 0); }
-            80% { clip-path: inset(54% 0 7% 0); transform: translate(-2px, 0); }
-            100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% { clip-path: inset(10% 0 85% 0); transform: translate(2px, 0); }
-            20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); }
-            40% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
-            60% { clip-path: inset(30% 0 70% 0); transform: translate(-2px, 0); }
-            80% { clip-path: inset(65% 0 15% 0); transform: translate(2px, 0); }
-            100% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 0); }
-        }
-
-        @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            10% { transform: skew(-2deg); }
-            20% { transform: skew(2deg); }
-            30% { transform: skew(0deg); }
-        } */
 
         .font-style-gradient {
             font-weight: 700;
@@ -470,6 +416,18 @@
             left: 0;
         }
 
+        /* Shifts drawer (slides from right) */
+        #shifts-drawer {
+            left: auto;
+            right: 0;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+        }
+
+        #shifts-drawer.open {
+            transform: translateX(0);
+        }
+
         .drawer-header {
             padding: 16px;
             font-size: 18px;
@@ -494,6 +452,88 @@
             font-size: 14px;
             text-align: center;
             opacity: 0.3;
+        }
+
+        /* Shifts Management Styles */
+        .shift-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border: 1px solid;
+            transition: background-color 0.2s;
+        }
+
+        .light .shift-item {
+            background-color: #ffffff;
+            border-color: #f0f0f0;
+        }
+
+        .dark .shift-item {
+            background-color: #1f1f1f;
+            border-color: #434343;
+        }
+
+        .shift-item:hover {
+            opacity: 0.9;
+        }
+
+        .shift-item-info {
+            flex: 1;
+        }
+
+        .shift-item-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .shift-item-time {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .shift-item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .shift-action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .light .shift-action-btn {
+            border-color: #e0e0e0;
+            color: #505050;
+        }
+
+        .dark .shift-action-btn {
+            border-color: #434343;
+            color: #e0e0e0;
+        }
+
+        .shift-action-btn:hover {
+            opacity: 0.7;
+        }
+
+        .shift-action-btn.delete {
+            color: #f44336;
+            border-color: #f44336;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 12px;
+            margin-top: 4px;
+            min-height: 16px;
         }
 
         .setting-item {
@@ -1269,7 +1309,7 @@
     </div>
 
     <!-- Drawer Overlay -->
-    <div class="drawer-overlay" id="drawer-overlay" ontouchstart="closeDrawer()" onclick="closeDrawer()"></div>
+    <div class="drawer-overlay" id="drawer-overlay" ontouchstart="closeAnyDrawer()" onclick="closeAnyDrawer()"></div>
 
     <!-- Drawer -->
     <div class="drawer" id="drawer">
@@ -1284,13 +1324,16 @@
                     <span class="setting-icon">⏰</span>
                     <span id="label-shift">Shift</span>
                 </div>
-                <select id="shift-select" onchange="changeShift()">
-                    <option value="0">D <span class="secondary-text">(07:00 - 15:00)</span></option>
-                    <option value="1">M <span class="secondary-text">(15:00 - 23:00)</span></option>
-                    <option value="2">N <span class="secondary-text">(23:00 - 07:00)</span></option>
-                    <option value="3">D12 <span class="secondary-text">(07:00 - 19:00)</span></option>
-                    <option value="4">N12 <span class="secondary-text">(19:00 - 07:00)</span></option>
-                </select>
+                <div style="display: flex; gap: 8px; align-items: center; flex: 1;">
+                    <select id="shift-select" onchange="changeShift()" style="flex: 1;">
+                        <option value="0">D (07:00 - 15:00)</option>
+                        <option value="1">M (15:00 - 23:00)</option>
+                        <option value="2">N (23:00 - 07:00)</option>
+                        <option value="3">D12 (07:00 - 19:00)</option>
+                        <option value="4">N12 (19:00 - 07:00)</option>
+                    </select>
+                    <button onclick="openShiftsDrawer()" style="padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border-color, #434343); background: var(--card-bg, #1f1f1f); color: inherit; cursor: pointer; font-size: 16px;" title="Manage Shifts">⚙️</button>
+                </div>
             </div>
 
             <!-- Show Logo -->
@@ -1536,8 +1579,53 @@
                 </select>
             </div>
             <div class="version">
-                Version 0.3.0
+                Version 0.4.0
             </div>
+        </div>
+    </div>
+
+    <!-- Shifts Management Drawer -->
+    <div class="drawer" id="shifts-drawer">
+        <div class="drawer-header">
+            <span id="shifts-drawer-title">Manage Shifts</span>
+            <span style="position: absolute; right: 16px; cursor: pointer; font-size: 24px;" ontouchstart="closeShiftsDrawer()" onclick="closeShiftsDrawer()">×</span>
+        </div>
+        <div class="drawer-content">
+            <!-- Shifts List -->
+            <div id="shifts-list" style="margin-bottom: 16px;">
+                <!-- Shifts will be populated here dynamically -->
+            </div>
+
+            <!-- Add/Edit Shift Form -->
+            <div id="shift-form" style="display: none; padding: 16px; border: 1px solid var(--border-color, #434343); border-radius: 8px; margin-bottom: 16px;">
+                <h3 id="shift-form-title" style="margin-top: 0; margin-bottom: 16px; font-size: 18px;">Add New Shift</h3>
+
+                <div style="margin-bottom: 12px;">
+                    <label for="shift-name-input" id="label-shift-name" style="display: block; margin-bottom: 4px; font-size: 14px;">Shift Name</label>
+                    <input type="text" id="shift-name-input" maxlength="10" placeholder="e.g., D, M, N" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color, #434343); background: var(--card-bg, #1f1f1f); color: inherit; font-size: 14px; box-sizing: border-box;" />
+                    <div id="shift-name-error" class="error-message"></div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label for="shift-start-input" id="label-start-time" style="display: block; margin-bottom: 4px; font-size: 14px;">Start Time</label>
+                    <input type="time" id="shift-start-input" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color, #434343); background: var(--card-bg, #1f1f1f); color: inherit; font-size: 14px; box-sizing: border-box;" />
+                    <div id="shift-start-error" class="error-message"></div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label for="shift-end-input" id="label-end-time" style="display: block; margin-bottom: 4px; font-size: 14px;">End Time</label>
+                    <input type="time" id="shift-end-input" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color, #434343); background: var(--card-bg, #1f1f1f); color: inherit; font-size: 14px; box-sizing: border-box;" />
+                    <div id="shift-end-error" class="error-message"></div>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                    <button id="btn-save-shift" onclick="saveShiftForm()" style="flex: 1; padding: 10px; border-radius: 8px; border: none; background: #4CAF50; color: white; cursor: pointer; font-size: 14px;">Save</button>
+                    <button id="btn-cancel-shift" onclick="cancelShiftForm()" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color, #434343); background: var(--card-bg, #1f1f1f); color: inherit; cursor: pointer; font-size: 14px;">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Add Shift Button -->
+            <button id="add-shift-btn" onclick="showAddShiftForm()" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color, #434343); background: var(--card-bg, #1f1f1f); color: inherit; cursor: pointer; font-size: 14px;"><span id="btn-add-shift-text">+ Add New Shift</span></button>
         </div>
     </div>
 
@@ -1651,6 +1739,24 @@
                 counterTitle: 'Counter',
                 showCounter: 'Show counter',
                 showCountdown: 'Show countdown',
+                manageShifts: 'Manage Shifts',
+                addNewShift: 'Add New Shift',
+                editShift: 'Edit Shift',
+                shiftName: 'Shift Name',
+                startTime: 'Start Time',
+                endTime: 'End Time',
+                save: 'Save',
+                cancel: 'Cancel',
+                edit: 'Edit',
+                delete: 'Delete',
+                noShiftsConfigured: 'No shifts configured',
+                addFirstShift: 'Add your first shift below',
+                shiftNameRequired: 'Shift name is required',
+                shiftNameMaxLength: 'Shift name must be 10 characters or less',
+                startTimeRequired: 'Start time is required',
+                endTimeRequired: 'End time is required',
+                deleteShiftConfirm: 'Are you sure you want to delete shift "{name}"?',
+                noShiftsMessage: 'No shifts configured. Please add a shift in settings.',
             },
             uk: {
                 app: 'Casssino',
@@ -1903,11 +2009,29 @@
                 counterTitle: 'Щотчик',
                 showCounter: 'Показувать щотчик',
                 showCountdown: 'Показувать обратний отщот',
+                manageShifts: 'Керування змінами',
+                addNewShift: 'Додати нову зміну',
+                editShift: 'Редагувати зміну',
+                shiftName: 'Назва зміни',
+                startTime: 'Час початку',
+                endTime: 'Час закінчення',
+                save: 'Зберегти',
+                cancel: 'Скасувати',
+                edit: 'Редагувати',
+                delete: 'Видалити',
+                noShiftsConfigured: 'Зміни не налаштовані',
+                addFirstShift: 'Додайте першу зміну нижче',
+                shiftNameRequired: 'Назва зміни обов\'язкова',
+                shiftNameMaxLength: 'Назва зміни не повинна перевищувати 10 символів',
+                startTimeRequired: 'Час початку обов\'язковий',
+                endTimeRequired: 'Час закінчення обов\'язковий',
+                deleteShiftConfirm: 'Ви впевнені, що хочете видалити зміну "{name}"?',
+                noShiftsMessage: 'Зміни не налаштовані. Будь ласка, додайте зміну в налаштуваннях.',
             }
         };
 
-        // Shifts
-        const shifts = [
+        // Default shifts configuration
+        const defaultShifts = [
             { name: 'D', start: '07:00', end: '15:00' },
             { name: 'M', start: '15:00', end: '23:00' },
             { name: 'N', start: '23:00', end: '07:00' },
@@ -1924,6 +2048,7 @@
             customClockBgColor: '#1f1f1f',
             customCountdownBgColor: '#1f1f1f',
             customCounterBgColor: '#1f1f1f',
+            shifts: [], // Will be loaded from localStorage or defaultShifts
             selectedShift: 0,
             showLogo: true,
             logoText: 'Tracker',
@@ -2031,8 +2156,26 @@
             const savedShowCountdown = localStorage.getItem('showCountdown');
             if (savedShowCountdown !== null) state.showCountdown = JSON.parse(savedShowCountdown);
 
+            // Load shifts from localStorage or use defaults
             const savedShifts = localStorage.getItem('shifts');
-            if (savedShifts !== null) shifts = JSON.parse(savedShifts);
+            if (savedShifts !== null) {
+                try {
+                    state.shifts = JSON.parse(savedShifts);
+                    // Validate that shifts is an array and has valid structure
+                    if (!Array.isArray(state.shifts) || state.shifts.length === 0) {
+                        state.shifts = [...defaultShifts];
+                    }
+                } catch (e) {
+                    state.shifts = [...defaultShifts];
+                }
+            } else {
+                state.shifts = [...defaultShifts];
+            }
+
+            // Ensure selectedShift index is valid
+            if (state.selectedShift >= state.shifts.length) {
+                state.selectedShift = 0;
+            }
 
             applyState();
         }
@@ -2060,6 +2203,7 @@
             document.getElementById('language-select').value = state.language;
             document.getElementById('show-counter-toggle').checked = state.showCounter;
 
+            populateShiftSelector(); // Populate shifts dropdown
             applyTheme();
             updateVisibility();
             updateTranslations();
@@ -2162,6 +2306,15 @@
             document.getElementById('label-language').textContent = t.language;
             document.getElementById('counter-title').textContent = t.counterTitle;
             document.getElementById('label-show-counter').textContent = t.showCounter;
+
+            // Shifts drawer translations
+            document.getElementById('shifts-drawer-title').textContent = t.manageShifts;
+            document.getElementById('label-shift-name').textContent = t.shiftName;
+            document.getElementById('label-start-time').textContent = t.startTime;
+            document.getElementById('label-end-time').textContent = t.endTime;
+            document.getElementById('btn-save-shift').textContent = t.save;
+            document.getElementById('btn-cancel-shift').textContent = t.cancel;
+            document.getElementById('btn-add-shift-text').textContent = `+ ${t.addNewShift}`;
         }
 
         // Toggle functions
@@ -2184,6 +2337,169 @@
         function closeDrawer() {
             document.getElementById('drawer').classList.remove('open');
             document.getElementById('drawer-overlay').classList.remove('open');
+        }
+
+        function closeAnyDrawer() {
+            // Close main settings drawer
+            if (document.getElementById('drawer').classList.contains('open')) {
+                closeDrawer();
+            }
+            // Close shifts drawer
+            if (document.getElementById('shifts-drawer').classList.contains('open')) {
+                closeShiftsDrawer();
+            }
+        }
+
+        // Shifts Management Functions
+        let editingShiftIndex = -1;
+
+        function openShiftsDrawer() {
+            document.getElementById('shifts-drawer').classList.add('open');
+            document.getElementById('drawer-overlay').classList.add('open');
+            populateShiftsList();
+        }
+
+        function closeShiftsDrawer() {
+            document.getElementById('shifts-drawer').classList.remove('open');
+            document.getElementById('drawer-overlay').classList.remove('open');
+            cancelShiftForm();
+        }
+
+        function populateShiftsList() {
+            const t = translations[state.language];
+            const shiftsList = document.getElementById('shifts-list');
+            shiftsList.innerHTML = '';
+
+            if (state.shifts.length === 0) {
+                shiftsList.innerHTML = `<div style="padding: 16px; text-align: center; opacity: 0.5;">${t.noShiftsConfigured}. ${t.addFirstShift}.</div>`;
+                return;
+            }
+
+            state.shifts.forEach((shift, index) => {
+                const shiftItem = document.createElement('div');
+                shiftItem.className = 'shift-item';
+                shiftItem.innerHTML = `
+                    <div class="shift-item-info">
+                        <div class="shift-item-name">${shift.name}</div>
+                        <div class="shift-item-time">${shift.start} - ${shift.end}</div>
+                    </div>
+                    <div class="shift-item-actions">
+                        <button class="shift-action-btn" onclick="editShift(${index})">${t.edit}</button>
+                        <button class="shift-action-btn delete" onclick="deleteShift(${index})">${t.delete}</button>
+                    </div>
+                `;
+                shiftsList.appendChild(shiftItem);
+            });
+        }
+
+        function showAddShiftForm() {
+            const t = translations[state.language];
+            editingShiftIndex = -1;
+            document.getElementById('shift-form-title').textContent = t.addNewShift;
+            document.getElementById('shift-name-input').value = '';
+            document.getElementById('shift-start-input').value = '';
+            document.getElementById('shift-end-input').value = '';
+            clearShiftErrors();
+            document.getElementById('shift-form').style.display = 'block';
+            document.getElementById('add-shift-btn').style.display = 'none';
+        }
+
+        function editShift(index) {
+            const t = translations[state.language];
+            editingShiftIndex = index;
+            const shift = state.shifts[index];
+            document.getElementById('shift-form-title').textContent = t.editShift;
+            document.getElementById('shift-name-input').value = shift.name;
+            document.getElementById('shift-start-input').value = shift.start;
+            document.getElementById('shift-end-input').value = shift.end;
+            clearShiftErrors();
+            document.getElementById('shift-form').style.display = 'block';
+            document.getElementById('add-shift-btn').style.display = 'none';
+        }
+
+        function deleteShift(index) {
+            const t = translations[state.language];
+            const confirmMsg = t.deleteShiftConfirm.replace('{name}', state.shifts[index].name);
+            if (confirm(confirmMsg)) {
+                // If deleting the currently selected shift, auto-select first shift
+                if (index === state.selectedShift) {
+                    state.selectedShift = 0;
+                    if (state.shifts.length === 1) {
+                        // This is the last shift, selectedShift will be invalid
+                        state.selectedShift = 0;
+                    }
+                } else if (index < state.selectedShift) {
+                    // Adjust selectedShift if we're deleting a shift before it
+                    state.selectedShift--;
+                }
+
+                state.shifts.splice(index, 1);
+                saveShifts();
+                localStorage.setItem('selectedShift', JSON.stringify(state.selectedShift));
+                populateShiftsList();
+                populateShiftSelector();
+                lastCountdownHtml = ''; // Reset cache to force rerender
+            }
+        }
+
+        function saveShiftForm() {
+            const t = translations[state.language];
+            const name = document.getElementById('shift-name-input').value.trim();
+            const start = document.getElementById('shift-start-input').value;
+            const end = document.getElementById('shift-end-input').value;
+
+            // Validate inputs
+            let hasError = false;
+            clearShiftErrors();
+
+            if (!name) {
+                document.getElementById('shift-name-error').textContent = t.shiftNameRequired;
+                hasError = true;
+            } else if (name.length > 10) {
+                document.getElementById('shift-name-error').textContent = t.shiftNameMaxLength;
+                hasError = true;
+            }
+
+            if (!start) {
+                document.getElementById('shift-start-error').textContent = t.startTimeRequired;
+                hasError = true;
+            }
+
+            if (!end) {
+                document.getElementById('shift-end-error').textContent = t.endTimeRequired;
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            const shift = { name, start, end };
+
+            if (editingShiftIndex === -1) {
+                // Adding new shift
+                state.shifts.push(shift);
+            } else {
+                // Editing existing shift
+                state.shifts[editingShiftIndex] = shift;
+            }
+
+            saveShifts();
+            populateShiftsList();
+            populateShiftSelector();
+            cancelShiftForm();
+            lastCountdownHtml = ''; // Reset cache to force rerender
+        }
+
+        function cancelShiftForm() {
+            editingShiftIndex = -1;
+            document.getElementById('shift-form').style.display = 'none';
+            document.getElementById('add-shift-btn').style.display = 'block';
+            clearShiftErrors();
+        }
+
+        function clearShiftErrors() {
+            document.getElementById('shift-name-error').textContent = '';
+            document.getElementById('shift-start-error').textContent = '';
+            document.getElementById('shift-end-error').textContent = '';
         }
 
         function changeTheme() {
@@ -2273,10 +2589,40 @@
         function changeShift() {
             state.selectedShift = parseInt(document.getElementById('shift-select').value);
             localStorage.setItem('selectedShift', JSON.stringify(state.selectedShift));
+            lastCountdownHtml = ''; // Reset cache to force rerender
+        }
+
+        // Save shifts to localStorage
+        function saveShifts() {
+            localStorage.setItem('shifts', JSON.stringify(state.shifts));
+        }
+
+        // Populate shift selector dropdown
+        function populateShiftSelector() {
+            const shiftSelect = document.getElementById('shift-select');
+            shiftSelect.innerHTML = '';
+
+            if (state.shifts.length === 0) {
+                const option = document.createElement('option');
+                option.value = '-1';
+                option.textContent = 'No shifts configured';
+                shiftSelect.appendChild(option);
+                shiftSelect.disabled = true;
+            } else {
+                shiftSelect.disabled = false;
+                state.shifts.forEach((shift, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${shift.name} (${shift.start} - ${shift.end})`;
+                    shiftSelect.appendChild(option);
+                });
+                shiftSelect.value = state.selectedShift;
+            }
         }
 
         function getDefaultCounterValue() {
-            const shift = shifts[state.selectedShift];
+            if (state.shifts.length === 0) return 8;
+            const shift = state.shifts[state.selectedShift];
             return (shift.name === 'D12' || shift.name === 'N12') ? 12 : 8;
         }
 
@@ -2328,8 +2674,10 @@
             }
             logo.style.display = 'block';
 
-            // Update logo text
-            logo.textContent = state.logoText;
+            // Only update logo text if it changed (to avoid restarting animations)
+            if (logo.textContent !== state.logoText) {
+                logo.textContent = state.logoText;
+            }
 
             // Get the target class name
             const targetClass = state.logoStyle !== 'default'
@@ -2422,6 +2770,7 @@
         function changeCountdownStyle() {
             state.countdownStyle = document.getElementById('countdown-style-select').value;
             localStorage.setItem('countdownStyle', state.countdownStyle);
+            lastCountdownHtml = ''; // Reset cache to force rerender
         }
 
         function changeLanguage() {
@@ -2431,6 +2780,7 @@
                 state.language = newLanguage;
                 localStorage.setItem('language', state.language);
                 updateTranslations();
+                lastCountdownHtml = ''; // Reset cache to force rerender
             }
         }
 
@@ -2768,14 +3118,22 @@
         // Render countdown
         function renderCountdown(now) {
             const t = translations[state.language];
-            const shift = shifts[state.selectedShift];
+
+            // Handle case when no shifts are configured
+            if (state.shifts.length === 0) {
+                return `<div class="card countdown-container">
+                    <div class="status-message" style="opacity: 0.5;">${t.noShiftsMessage}</div>
+                </div>`;
+            }
+
+            const shift = state.shifts[state.selectedShift];
             const status = getShiftStatus(now, shift);
 
             if (status !== 'active') {
                 let message = status === 'notStarted'
                     ? t.shiftNotStarted.replace('{name}', shift.name)
                     : t.shiftEnded.replace('{name}', shift.name);
-                return `<div class="card countdown-container ">
+                return `<div class="card countdown-container">
                     <div class="status-message changableFont">${message}</div>
                 </div>`;
             }
@@ -2817,7 +3175,7 @@
                     <div class="countdown-text changableFont">${hoursText}${minutes} ${t.minutesShort} ${seconds} ${t.secondsShort}</div>
                 </div>`;
             } else if (state.countdownStyle === 'circular') {
-                const hoursMax = (shifts[state.selectedShift].name === 'D12' || shifts[state.selectedShift].name === 'N12') ? 12 : 8;
+                const hoursMax = (state.shifts[state.selectedShift].name === 'D12' || state.shifts[state.selectedShift].name === 'N12') ? 12 : 8;
                 const hoursPercent = (hours / hoursMax) * 100;
                 const minutesPercent = (minutes / 60) * 100;
                 const secondsPercent = (seconds / 60) * 100;
@@ -2927,6 +3285,9 @@
             }
         }
 
+        // Cache for countdown HTML to prevent unnecessary rerenders
+        let lastCountdownHtml = '';
+
         // Update display
         function updateDisplay() {
             const now = new Date();
@@ -2943,12 +3304,20 @@
                 clockDisplay.innerHTML = '';
             }
 
-            // Update countdown
+            // Update countdown (only if HTML changed to prevent animation restarts)
             const countdownDisplay = document.getElementById('countdown-display');
-            countdownDisplay.innerHTML = renderCountdown(now);
+            const newCountdownHtml = renderCountdown(now);
+            let countdownUpdated = false;
+            if (newCountdownHtml !== lastCountdownHtml) {
+                countdownDisplay.innerHTML = newCountdownHtml;
+                lastCountdownHtml = newCountdownHtml;
+                countdownUpdated = true;
+            }
 
-            // Reapply font styles to newly rendered elements
-            updateFont();
+            // Reapply font styles only to newly rendered elements
+            if (countdownUpdated) {
+                updateFont();
+            }
 
             // Reapply custom theme colors to newly rendered elements
             if (state.themeMode === 'custom') {
