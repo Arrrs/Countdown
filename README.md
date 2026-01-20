@@ -3,20 +3,9 @@
 A Progressive Web App (PWA) for tracking work shifts with real-time countdown timers, customizable clocks, and counters.
 
 
-<div style="display: flex; gap: 10px; justify-content: center;">
-  <div style="width: 22%;">
-    <img src="screenshots/MainView.png" alt="Main View" style="width: 100%; border-radius: 8px;">
-  </div>
-  <div style="width: 22%;">
-    <img src="screenshots/SettingsView1.png" alt="Settings View 1" style="width: 100%; border-radius: 8px;">
-  </div>
-  <div style="width: 22%;">
-    <img src="screenshots/SettingsView2.png" alt="Settings View 2" style="width: 100%; border-radius: 8px;">
-  </div>
-  <div style="width: 22%;">
-    <img src="screenshots/ShiftsSetup.png" alt="Shifts Setup" style="width: 100%; border-radius: 8px;">
-  </div>
-</div>
+| | | | |
+|:---:|:---:|:---:|:---:|
+| ![Main View](screenshots/MainView.png) | ![Settings 1](screenshots/SettingsView1.png) | ![Settings 2](screenshots/SettingsView2.png) | ![Shifts Setup](screenshots/ShiftsSetup.png) |
 
 
 ## Features
